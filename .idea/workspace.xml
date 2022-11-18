@@ -5,64 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32b39ae0-63dd-43ac-acbf-d7427c70cf49" name="Changes" comment="core package and start io">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/tudom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/Nought.uml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexMono-Italic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexMono-Regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexMono-SemiBold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexMono-SemiBoldItalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexSans-Italic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexSans-Regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexSans-SemiBold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexSans-SemiBoldItalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexSerif-Italic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexSerif-Regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexSerif-SemiBold.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexSerif-SemiBoldItalic.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/mplus1mn-bold-ascii.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/mplus1mn-bold-subset.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/mplus1mn-bold_italic-ascii.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/mplus1mn-bold_italic-subset.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/mplus1mn-italic-ascii.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/mplus1mn-italic-subset.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/mplus1mn-regular-ascii-conums.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/mplus1mn-regular-subset.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/mplus1p-regular-fallback.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/notoemoji-subset.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/notoserif-bold-subset.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/notoserif-bold_italic-subset.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/notoserif-italic-subset.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/fonts/notoserif-regular-subset.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/nought-spec.adoc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/plex.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/BadTodoOperation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/Todo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoStore.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoImporter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoXMLImporter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/xml/ElementHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/xml/TextCallback.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/nought.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/test.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/core/TodoConstructionTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/core/TodoStoreTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/core/TodoTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/io/TodoXMLTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +78,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.sourceCode"
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -255,8 +200,16 @@
       <workItem from="1667415904118" duration="71000" />
       <workItem from="1667512011832" duration="126000" />
       <workItem from="1667945436831" duration="7083000" />
-      <workItem from="1668790618600" duration="20033000" />
+      <workItem from="1668790618600" duration="20940000" />
     </task>
+    <task id="LOCAL-00001" summary="core package and start io">
+      <created>1668811541155</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1668811541155</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -274,6 +227,9 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
     <MESSAGE value="core package and start io" />
     <option name="LAST_COMMIT_MESSAGE" value="core package and start io" />
   </component>
