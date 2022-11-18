@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="32b39ae0-63dd-43ac-acbf-d7427c70cf49" name="Changes" comment="core package and start io">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/tudom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/Nought.uml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexMono-Italic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexMono-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexMono-SemiBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexMono-SemiBoldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexSans-Italic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexSans-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexSans-SemiBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexSans-SemiBoldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexSerif-Italic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexSerif-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexSerif-SemiBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/IBMPlexSerif-SemiBoldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/mplus1mn-bold-ascii.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/mplus1mn-bold-subset.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/mplus1mn-bold_italic-ascii.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/mplus1mn-bold_italic-subset.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/mplus1mn-italic-ascii.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/mplus1mn-italic-subset.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/mplus1mn-regular-ascii-conums.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/mplus1mn-regular-subset.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/mplus1p-regular-fallback.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/notoemoji-subset.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/notoserif-bold-subset.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/notoserif-bold_italic-subset.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/notoserif-italic-subset.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/fonts/notoserif-regular-subset.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/nought-spec.adoc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/plex.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/BadTodoOperation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/Todo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoStore.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoImporter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoXMLImporter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/xml/ElementHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/xml/TextCallback.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/nought.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/test.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/core/TodoConstructionTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/core/TodoStoreTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/core/TodoTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/io/TodoXMLTests.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Empty" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2GJgQkOulvgWRD4sgKrcbkCvoMp" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultPlantUmlFileTemplate": "Empty",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "WebServerToolWindowFactoryState": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "last_opened_file_path": "D:/.projects/prog3/SwingMvcLab",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.sourceCode"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\.projects\prog3\Nought\docs" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\.projects\prog3\Nought\docs" />
+      <recent name="D:\.projects\prog3\Nought" />
+      <recent name="D:\.projects\prog3\Nought\docs\theme" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.Nought [test]">
+    <configuration name="Nought" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="hu.kszi2.nought.gui.Nought" />
+      <module name="Nought.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="hu.kszi2.nought.core.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Docs" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="asciidoctorPdf" />
+          </list>
+        </option>
+        <option name="vmOptions" value="--add-opens java.base/sun.nio.ch=ALL-UNNAMED --add-opens java.base/java.io=ALL-UNNAMED" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="Nought [test]" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="TodoXMLTests.todoStoreContainsCorrectChildrenAfterParsing" type="GradleRunConfiguration" factoryName="Gradle" temporary="true" nameIsGenerated="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;hu.kszi2.nought.io.TodoXMLTests.todoStoreContainsCorrectChildrenAfterParsing&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Nought" />
+      <item itemvalue="Gradle.Docs" />
+      <item itemvalue="Gradle.Nought [test]" />
+      <item itemvalue="Gradle.TodoXMLTests.todoStoreContainsCorrectChildrenAfterParsing" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.TodoXMLTests.todoStoreContainsCorrectChildrenAfterParsing" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="1" Folder0="D:\_build-area\dictionaries\dictionaries\hu" CustomDictionaries="1" CustomDictionary0="D:\_build-area\dictionaries\dictionaries\hu\index.dic" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="32b39ae0-63dd-43ac-acbf-d7427c70cf49" name="Changes" comment="" />
+      <created>1666112090134</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1666112090134</updated>
+      <workItem from="1666112092672" duration="4707000" />
+      <workItem from="1666118622958" duration="9889000" />
+      <workItem from="1666208191643" duration="2083000" />
+      <workItem from="1666464757210" duration="8015000" />
+      <workItem from="1666548290097" duration="5270000" />
+      <workItem from="1666876588659" duration="76000" />
+      <workItem from="1666974012258" duration="6026000" />
+      <workItem from="1667415904118" duration="71000" />
+      <workItem from="1667512011832" duration="126000" />
+      <workItem from="1667945436831" duration="7083000" />
+      <workItem from="1668790618600" duration="20033000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="core package and start io" />
+    <option name="LAST_COMMIT_MESSAGE" value="core package and start io" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="GradleRunConfiguration">
+        <watch expression="((TodoXMLImporter)this).builder" custom="hu.kszi2.nought.io.TodoXMLImporter" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Nought$TodoXMLTests_todoStoreContainsCorrectChildrenAfterParsing.ic" NAME="TodoXMLTests.todoStoreContainsCorrectChildrenAfterParsing Coverage Results" MODIFIED="1668809780195" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Nought$Nought__test_.ic" NAME="Nought [test] Coverage Results" MODIFIED="1668811053547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Nought$Nought__check_.ic" NAME="Nought [check] Coverage Results" MODIFIED="1668796429976" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>

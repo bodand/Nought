@@ -1,0 +1,54 @@
+extends: default-with-fallback-font
+
+base:
+  font-family: IBMPlexSerif
+
+header:
+  font-family: IBMPlexSans
+
+code:
+  font-family: IBMPlexMono
+  font-size: 10
+
+footer:
+  verso:
+    right:
+      content: Bodor András - YZBQWV
+  recto:
+    left:
+      content: Bodor András - YZBQWV
+
+svg:
+  fallback_font_family: IBMPlexSans
+
+admonition:
+  icon:
+    caution:
+      name: fas-skull
+    important:
+      name: fas-flag
+    note:
+      name: fas-paperclip
+    tip:
+      name: fas-lightbulb
+    warning:
+      name: fas-magic
+
+font:
+  catalog:
+    merge: true
+    IBMPlexSans:
+      normal: IBMPlexSans-Regular.ttf
+      italic: IBMPlexSans-Italic.ttf
+      bold: IBMPlexSans-SemiBold.ttf
+      bold_italic: IBMPlexSans-SemiBoldItalic.ttf
+    IBMPlexSerif:
+      normal: IBMPlexSerif-Regular.ttf
+      italic: IBMPlexSerif-Italic.ttf
+      bold: IBMPlexSerif-SemiBold.ttf
+      bold_italic: IBMPlexSerif-SemiBoldItalic.ttf
+    IBMPlexMono:
+      normal: IBMPlexMono-Regular.ttf
+      italic: IBMPlexMono-Italic.ttf
+      bold: IBMPlexMono-SemiBold.ttf
+      bold_italic: IBMPlexMono-SemiBoldItalic.ttf

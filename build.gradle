@@ -1,0 +1,68 @@
+plugins {
+    id 'java'
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'
+    id 'org.asciidoctor.jvm.gems' version '3.3.2'
+    id 'org.asciidoctor.jvm.pdf' version '3.3.2'
+}
+
+group 'hu.kszi2'
+version '0.1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    ruby {
+        gems()
+    }
+}
+
+dependencies {
+    implementation 'jaxen:jaxen:1.2.0'
+    implementation 'org.jdom:jaxen-jdom:1.0-FCS'
+    implementation 'org.jetbrains:annotations:23.0.0'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.1'
+
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.9.0'
+
+    // Docs
+    asciidoctorGems 'rubygems:rouge:3.30.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+pdfThemes {
+    local 'plex.yml', {
+        themeDir = file('docs')
+    }
+}
+
+asciidoctorj {
+    modules {
+        diagram.use()
+        diagram.version '2.2.3'
+    }
+}
+
+asciidoctorPdf {
+    dependsOn asciidoctorGemsPrepare
+
+    // JDK 16+ workaround, doesn't work
+    // Need to install things w/ JDK < 16, then change back to JDK16+
+    inProcess = JAVA_EXEC
+    forkOptions {
+        jvmArgs("--add-opens", "java.base/sun.nio.ch=ALL-UNNAMED", "--add-opens", "java.base/java.io=ALL-UNNAMED")
+    }
+
+    asciidoctorj {
+        requires 'rouge'
+    }
+
+    fontsDir = file('docs/fonts')
+    theme 'plex.yml'
+    sourceDir file('docs')
+    outputDir file('build/docs')
+}

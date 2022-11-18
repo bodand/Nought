@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<nought xmlns="https://kszi2.hu/~bodand/nought.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+				xsi:schemaLocation="https://kszi2.hu/~bodand/nought.xsd file://nought.xsd">
+	<todos>
+		<todo id="_60f2abf2-f76d-49f9-a4a5-c87b13a9cbbc">
+			<name>Todo 1</name>
+			<desc>Todo text</desc>
+		</todo>
+		<todo id="_c2a32159-662f-42c9-a1a3-740ebe15cb00">
+			<name>Todo 2</name>
+			<desc>Todo text 2</desc>
+			<depends-on>
+				<todo ref="_60f2abf2-f76d-49f9-a4a5-c87b13a9cbbc" />
+			</depends-on>
+			<due>
+				<date>2022-11-07</date>
+				<time>23:59:00</time>
+			</due>
+		</todo>
+	</todos>
+</nought>

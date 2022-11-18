@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified" targetNamespace="https://kszi2.hu/~bodand/nought.xsd"
+					 xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ngt="https://kszi2.hu/~bodand/nought.xsd" version="1.1">
+	<xs:element name="nought">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element type="ngt:todosType" name="todos" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="todosType">
+		<xs:sequence>
+			<xs:element name="todo" type="ngt:todoType" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="todoType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="desc" type="xs:string" />
+			<xs:element name="depends-on" type="ngt:dependsOnType" minOccurs="0" />
+			<xs:element name="due" type="ngt:dueType" minOccurs="0" />
+		</xs:sequence>
+		<xs:attribute name="id" type="xs:ID" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="dependsOnType">
+		<xs:sequence>
+			<xs:element name="todo" minOccurs="0">
+				<xs:complexType>
+					<xs:attribute name="ref" type="xs:IDREF" />
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="dueType">
+		<xs:sequence>
+			<xs:element name="date" type="xs:date" />
+			<xs:element name="time" type="xs:time" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
