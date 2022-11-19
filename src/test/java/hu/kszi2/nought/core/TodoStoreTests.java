@@ -29,6 +29,13 @@ class TodoStoreTests {
     }
 
     @Test
+    void storeCanCreateIterator() {
+        var it = store.iterator();
+
+        assertNotNull(it);
+    }
+
+    @Test
     void storeCanAddTodo() throws Exception {
         var builder = store.newBuilder();
         var todo = builder
@@ -141,7 +148,6 @@ class TodoStoreTests {
                 () -> store.findById(id));
         assertThrows(NoSuchElementException.class,
                 () -> store.findById(cid));
-;
     }
 
     private TodoStore store;

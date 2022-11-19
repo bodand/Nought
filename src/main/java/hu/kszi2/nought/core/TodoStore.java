@@ -5,10 +5,7 @@ import hu.kszi2.nought.io.TodoImporter;
 import hu.kszi2.nought.io.TodoXMLExporter;
 import hu.kszi2.nought.io.TodoXMLImporter;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.UUID;
+import java.util.*;
 
 public class TodoStore {
     public TodoBuilder newBuilder() {
@@ -21,6 +18,10 @@ public class TodoStore {
 
     public TodoExporter newExporter() {
         return new TodoXMLExporter(this);
+    }
+
+    public Iterator<Todo> iterator() {
+        return todos.iterator();
     }
 
     public void add(Todo todo) throws IllegalArgumentException {

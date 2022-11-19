@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32b39ae0-63dd-43ac-acbf-d7427c70cf49" name="Changes" comment="remove sonarlint's garbage from git">
+    <list default="true" id="32b39ae0-63dd-43ac-acbf-d7427c70cf49" name="Changes" comment="XMLExport support for todo">
       <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoExporter.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoXMLExporter.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/io/TodoXMLExportTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nought.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/nought.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoStore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/core/TodoStoreTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/core/TodoStoreTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +35,23 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Nought" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Nought" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Nought" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -76,6 +92,7 @@
     "WebServerToolWindowPanel.toolwindow.show.date": "false",
     "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
     "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "last.edited.regexp": "<?xml version=\"1.0\"?><completed/>",
     "last_opened_file_path": "D:/.projects/prog3/Nought/src/test/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -135,6 +152,27 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="Nought [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="Nought [test]" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -152,6 +190,29 @@
         <option name="vmOptions" />
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="TodoXMLExportTests.childrenTodoStoreAllOutputsValidXML" type="GradleRunConfiguration" factoryName="Gradle" temporary="true" nameIsGenerated="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;hu.kszi2.nought.io.TodoXMLExportTests.childrenTodoStoreAllOutputsValidXML&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
@@ -183,10 +244,14 @@
       <item itemvalue="Application.Nought" />
       <item itemvalue="Gradle.Docs" />
       <item itemvalue="Gradle.Nought [test]" />
+      <item itemvalue="Gradle.Nought [clean]" />
+      <item itemvalue="Gradle.TodoXMLExportTests.childrenTodoStoreAllOutputsValidXML" />
       <item itemvalue="Gradle.TodoXMLTests.todoStoreContainsCorrectChildrenAfterParsing" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.TodoXMLExportTests.childrenTodoStoreAllOutputsValidXML" />
+        <item itemvalue="Gradle.Nought [clean]" />
         <item itemvalue="Gradle.TodoXMLTests.todoStoreContainsCorrectChildrenAfterParsing" />
       </list>
     </recent_temporary>
@@ -210,7 +275,7 @@
       <workItem from="1667512011832" duration="126000" />
       <workItem from="1667945436831" duration="7083000" />
       <workItem from="1668790618600" duration="21051000" />
-      <workItem from="1668867200974" duration="10017000" />
+      <workItem from="1668867200974" duration="17452000" />
     </task>
     <task id="LOCAL-00001" summary="core package and start io">
       <created>1668811541155</created>
@@ -240,7 +305,28 @@
       <option name="project" value="LOCAL" />
       <updated>1668877430230</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fix XSD to allow empty todo lists">
+      <created>1668877915097</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1668877915097</updated>
+    </task>
+    <task id="LOCAL-00006" summary="update XSD file to allow unbounded todo references">
+      <created>1668885238276</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1668885238276</updated>
+    </task>
+    <task id="LOCAL-00007" summary="update Gradle script:">
+      <created>1668885264247</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1668885264247</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -265,15 +351,22 @@
     <MESSAGE value="update gitignore" />
     <MESSAGE value="100% coverage on import and core" />
     <MESSAGE value="remove sonarlint's garbage from git" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove sonarlint's garbage from git" />
+    <MESSAGE value="fix XSD to allow empty todo lists" />
+    <MESSAGE value="update XSD file to allow unbounded todo references" />
+    <MESSAGE value="update Gradle script:" />
+    <MESSAGE value="XMLExport support for todo" />
+    <option name="LAST_COMMIT_MESSAGE" value="XMLExport support for todo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/hu/kszi2/nought/io/TodoXMLExportTests.java</url>
-          <line>45</line>
-          <option name="timeStamp" value="3" />
+          <line>199</line>
+          <properties>
+            <option name="lambda-ordinal" value="0" />
+          </properties>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -284,7 +377,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Nought$TodoXMLTests_todoStoreContainsCorrectChildrenAfterParsing.ic" NAME="TodoXMLTests.todoStoreContainsCorrectChildrenAfterParsing Coverage Results" MODIFIED="1668809780195" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Nought$Nought__test_.ic" NAME="Nought [test] Coverage Results" MODIFIED="1668869515336" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Nought$Nought__test_.ic" NAME="Nought [test] Coverage Results" MODIFIED="1668885189429" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Nought$Nought__check_.ic" NAME="Nought [check] Coverage Results" MODIFIED="1668796429976" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
