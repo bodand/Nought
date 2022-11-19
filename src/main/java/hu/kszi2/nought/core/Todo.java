@@ -136,6 +136,10 @@ public class Todo {
         store.unlink(this);
     }
 
+    public @NotNull List<UUID> getChildren() {
+        return children;
+    }
+
     @NotNull
     private final UUID id;
     @NotNull

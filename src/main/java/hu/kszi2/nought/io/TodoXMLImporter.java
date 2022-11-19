@@ -6,6 +6,7 @@ import hu.kszi2.nought.core.TodoBuilder;
 import hu.kszi2.nought.core.TodoStore;
 import hu.kszi2.nought.io.xml.ElementHandler;
 import hu.kszi2.nought.io.xml.TextCallback;
+import org.jetbrains.annotations.Nullable;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -14,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,6 +51,8 @@ public class TodoXMLImporter
                 attributes -> nextTextCallback = this::parseDueDate);
         elementHandlers.put("time",
                 attributes -> nextTextCallback = this::parseDueTime);
+        elementHandlers.put("completed",
+                attributes -> nextTextCallback = this::addCompleted);
     }
 
     private void parseDueDate(String s) {
@@ -61,8 +65,12 @@ public class TodoXMLImporter
     }
 
     private void parseDueTime(String s) {
-        var formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        addDueTime(LocalTime.parse(s, formatter));
+        try {
+            var formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            addDueTime(LocalTime.parse(s, formatter));
+        } catch (DateTimeParseException ex) {
+            /* nop */
+        }
     }
 
     @Override
@@ -103,6 +111,10 @@ public class TodoXMLImporter
     @Override
     public void addCompleted(boolean completed) {
         builder.setCompleted(completed);
+    }
+
+    public void addCompleted(String s) {
+        addCompleted(true);
     }
 
     @Override

@@ -22,6 +22,13 @@ class TodoStoreTests {
     }
 
     @Test
+    void storeCanCreateTodoImporter() {
+        var in = store.newImporter();
+
+        assertNotNull(in);
+    }
+
+    @Test
     void storeCanAddTodo() throws Exception {
         var builder = store.newBuilder();
         var todo = builder
@@ -54,6 +61,87 @@ class TodoStoreTests {
         var found = assertDoesNotThrow(() -> store.findById(id));
         assertEquals("what", found.getName());
         assertEquals("ever", found.getDescription());
+    }
+
+    @Test
+    void removeSingleTodoRemovesChildlessTodo() throws Exception {
+        var id = UUID.randomUUID();
+        var builder = store.newBuilder();
+        var todo = builder
+                .setId(id)
+                .setName("what")
+                .setDescription("ever")
+                .build();
+
+        store.add(todo);
+        assertDoesNotThrow(() -> store.removeById(id));
+        assertThrows(NoSuchElementException.class,
+                () -> store.findById(id));
+    }
+
+    @Test
+    void removeSingleTodoThrowsForTodoWithChildren() throws Exception {
+        var id = UUID.randomUUID();
+        var builder = store.newBuilder();
+        var todoChild = builder
+                .newId()
+                .setName("child")
+                .setDescription("desc")
+                .build();
+        var todo = builder
+                .setId(id)
+                .setName("what")
+                .setDescription("ever")
+                .addChild(todoChild.getId())
+                .build();
+
+        store.add(todoChild);
+        store.add(todo);
+        assertThrows(BadTodoOperation.class, () -> store.removeById(id));
+    }
+
+    @Test
+    void removeBranchRemovesChildlessTodo() throws Exception {
+        var id = UUID.randomUUID();
+        var builder = store.newBuilder();
+        var todo = builder
+                .setId(id)
+                .setName("what")
+                .setDescription("ever")
+                .build();
+
+        store.add(todo);
+        assertDoesNotThrow(() -> store.removeBranchAtId(id));
+        assertThrows(NoSuchElementException.class,
+                () -> store.findById(id));
+    }
+
+    @Test
+    void removeBranchRemovesForTodoWithChildren() throws Exception {
+        var id = UUID.randomUUID();
+        var builder = store.newBuilder();
+        var todoChild = builder
+                .newId()
+                .setName("child")
+                .setDescription("desc")
+                .build();
+        var todo = builder
+                .setId(id)
+                .setName("what")
+                .setDescription("ever")
+                .addChild(todoChild.getId())
+                .build();
+        var cid = todoChild.getId();
+        store.add(todoChild);
+        store.add(todo);
+
+        assertDoesNotThrow(() -> store.removeBranchAtId(id));
+
+        assertThrows(NoSuchElementException.class,
+                () -> store.findById(id));
+        assertThrows(NoSuchElementException.class,
+                () -> store.findById(cid));
+;
     }
 
     private TodoStore store;

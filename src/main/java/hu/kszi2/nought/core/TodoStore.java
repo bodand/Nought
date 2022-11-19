@@ -1,6 +1,8 @@
 package hu.kszi2.nought.core;
 
+import hu.kszi2.nought.io.TodoExporter;
 import hu.kszi2.nought.io.TodoImporter;
+import hu.kszi2.nought.io.TodoXMLExporter;
 import hu.kszi2.nought.io.TodoXMLImporter;
 
 import java.util.ArrayList;
@@ -15,6 +17,10 @@ public class TodoStore {
 
     public TodoImporter<Todo> newImporter() {
         return new TodoXMLImporter(this);
+    }
+
+    public TodoExporter newExporter() {
+        return new TodoXMLExporter(this);
     }
 
     public void add(Todo todo) throws IllegalArgumentException {

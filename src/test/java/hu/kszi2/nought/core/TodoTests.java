@@ -5,8 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.*;
 
 import java.time.LocalTime;
 import java.util.Calendar;
@@ -86,6 +85,22 @@ class TodoTests {
     }
 
     @ParameterizedTest
+    @EmptySource
+    @ValueSource(strings = {"value", "@&đäˇ$Łäđ[Đ", "<TODO>"})
+    void todoSetNameSetsAllowedStringNames(String data) {
+        todo.setName(data);
+        assertEquals(data, todo.getName());
+    }
+
+    @ParameterizedTest
+    @EmptySource
+    @ValueSource(strings = {"value", "@&đäˇłÄ@|\n\n$Łäđ[Đ$Ł[$ä", "<TODO>"})
+    void todoSetNameSetsAllowedStringDescription(String data) {
+        todo.setDescription(data);
+        assertEquals(data, todo.getDescription());
+    }
+
+    @ParameterizedTest
     @NullSource
     @MethodSource("equalityTodoProvider")
     void equality(Object compareTo) {
@@ -101,6 +116,11 @@ class TodoTests {
     }
 
     @Test
+    void todoComparesFalseToNotTodoObject() {
+        assertNotEquals(todo, (Object) "thing");
+    }
+
+    @Test
     void hashOfTodoIsEqualToThatOfItsGUID() {
         assertEquals(todo.getId().hashCode(), todo.hashCode());
     }
@@ -111,10 +131,8 @@ class TodoTests {
         builder.setName("random").setDescription("text");
         return Stream.of(
                 builder.newId().build(),
-                builder.setId(UUID.fromString("6a98fbfc-dfad-42b2-922e-3859c4064c55")).setCompleted(true).build(),
-                42,
-                "DEADBEEF"
-        );
+                builder.setId(UUID.fromString("6a98fbfc-dfad-42b2-922e-3859c4064c55")).setCompleted(true).build()
+                );
     }
 
     private Todo todo;

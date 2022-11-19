@@ -19,6 +19,7 @@
 		<xs:sequence>
 			<xs:element name="name" type="xs:string" />
 			<xs:element name="desc" type="xs:string" />
+			<xs:element name="completed" type="ngt:completedType" minOccurs="0" />
 			<xs:element name="depends-on" type="ngt:dependsOnType" minOccurs="0" />
 			<xs:element name="due" type="ngt:dueType" minOccurs="0" />
 		</xs:sequence>
@@ -41,4 +42,6 @@
 			<xs:element name="time" type="xs:time" minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
+
+	<xs:complexType name="completedType" />
 </xs:schema>
