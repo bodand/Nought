@@ -28,12 +28,12 @@
 
 	<xs:complexType name="dependsOnType">
 		<xs:sequence>
-			<xs:element name="todo" minOccurs="0">
-				<xs:complexType>
-					<xs:attribute name="ref" type="xs:IDREF" />
-				</xs:complexType>
-			</xs:element>
+			<xs:element name="todo" type="ngt:todorefType" maxOccurs="unbounded"/>
 		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="todorefType">
+		<xs:attribute name="ref" type="xs:IDREF" use="required" />
 	</xs:complexType>
 
 	<xs:complexType name="dueType">
