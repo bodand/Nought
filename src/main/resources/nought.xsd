@@ -11,7 +11,7 @@
 
 	<xs:complexType name="todosType">
 		<xs:sequence>
-			<xs:element name="todo" type="ngt:todoType" maxOccurs="unbounded" />
+			<xs:element name="todo" type="ngt:todoType" minOccurs="0" maxOccurs="unbounded" />
 		</xs:sequence>
 	</xs:complexType>
 
