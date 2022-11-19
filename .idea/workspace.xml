@@ -4,21 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32b39ae0-63dd-43ac-acbf-d7427c70cf49" name="Changes" comment="update gitignore">
+    <list default="true" id="32b39ae0-63dd-43ac-acbf-d7427c70cf49" name="Changes" comment="100% coverage on import and core">
       <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoExporter.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoXMLExporter.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/io/TodoXMLExportTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/Todo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoXMLImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoXMLImporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/nought.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/nought.xsd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/core/TodoStoreTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/core/TodoStoreTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/core/TodoTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/core/TodoTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/io/TodoXMLTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/io/TodoXMLImportTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,7 +206,7 @@
       <workItem from="1667512011832" duration="126000" />
       <workItem from="1667945436831" duration="7083000" />
       <workItem from="1668790618600" duration="21051000" />
-      <workItem from="1668867200974" duration="9189000" />
+      <workItem from="1668867200974" duration="9438000" />
     </task>
     <task id="LOCAL-00001" summary="core package and start io">
       <created>1668811541155</created>
@@ -229,7 +222,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668812275523</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="100% coverage on import and core">
+      <created>1668877248318</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1668877248318</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -252,14 +252,19 @@
     </ignored-roots>
     <MESSAGE value="core package and start io" />
     <MESSAGE value="update gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="update gitignore" />
+    <MESSAGE value="100% coverage on import and core" />
+    <option name="LAST_COMMIT_MESSAGE" value="100% coverage on import and core" />
   </component>
   <component name="XDebuggerManager">
-    <watches-manager>
-      <configuration name="GradleRunConfiguration">
-        <watch expression="((TodoXMLImporter)this).builder" custom="hu.kszi2.nought.io.TodoXMLImporter" />
-      </configuration>
-    </watches-manager>
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/hu/kszi2/nought/io/TodoXMLExportTests.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
