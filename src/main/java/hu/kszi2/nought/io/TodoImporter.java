@@ -1,15 +1,20 @@
 package hu.kszi2.nought.io;
 
 import hu.kszi2.nought.core.BadTodoOperation;
+import hu.kszi2.nought.core.Todo;
+import hu.kszi2.nought.core.TodoStore;
 
+import java.io.InputStream;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.UUID;
 
-public interface TodoImporter<T> {
+public interface TodoImporter {
+    TodoStore importFrom(InputStream strm) throws Exception;
+
     void startTodo(UUID id);
 
-    T endTodo() throws BadTodoOperation;
+    Todo endTodo() throws BadTodoOperation;
 
     void addName(String name);
 

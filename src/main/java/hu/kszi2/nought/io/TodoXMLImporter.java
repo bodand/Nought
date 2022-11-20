@@ -6,11 +6,13 @@ import hu.kszi2.nought.core.TodoBuilder;
 import hu.kszi2.nought.core.TodoStore;
 import hu.kszi2.nought.io.xml.ElementHandler;
 import hu.kszi2.nought.io.xml.TextCallback;
-import org.jetbrains.annotations.Nullable;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -23,7 +25,16 @@ import java.util.UUID;
 
 public class TodoXMLImporter
         extends DefaultHandler
-        implements TodoImporter<Todo> {
+        implements TodoImporter {
+    @Override
+    public TodoStore importFrom(InputStream strm)
+            throws ParserConfigurationException, SAXException, IOException {
+        var sax = SAXParserFactory.newInstance();
+        var parser = sax.newSAXParser();
+        parser.parse(strm, this);
+        return store;
+    }
+
     public TodoXMLImporter(TodoStore todoStore) {
         store = todoStore;
         elementHandlers.put("todo", attributes -> {
@@ -35,6 +46,7 @@ public class TodoXMLImporter
             }
             var ref = attributes.getValue("ref");
             if (ref != null) {
+                skipEnd = true;
                 ref = ref.substring(1);
                 addChild(UUID.fromString(ref));
                 return;
@@ -66,7 +78,7 @@ public class TodoXMLImporter
 
     private void parseDueTime(String s) {
         try {
-            var formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            var formatter = DateTimeFormatter.ISO_TIME;
             addDueTime(LocalTime.parse(s, formatter));
         } catch (DateTimeParseException ex) {
             /* nop */
@@ -80,6 +92,10 @@ public class TodoXMLImporter
 
     @Override
     public Todo endTodo() throws BadTodoOperation {
+        if (skipEnd) {
+            skipEnd = false;
+            return null;
+        }
         if (builder != null) {
             var todo = builder.build();
             builder = null;
@@ -156,4 +172,5 @@ public class TodoXMLImporter
     private TodoBuilder builder;
     private final Map<String, ElementHandler> elementHandlers = new HashMap<>();
     private TextCallback nextTextCallback;
+    private boolean skipEnd = false;
 }

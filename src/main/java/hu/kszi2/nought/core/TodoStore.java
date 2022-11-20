@@ -12,7 +12,7 @@ public class TodoStore {
         return new TodoBuilder(this);
     }
 
-    public TodoImporter<Todo> newImporter() {
+    public TodoImporter newImporter() {
         return new TodoXMLImporter(this);
     }
 

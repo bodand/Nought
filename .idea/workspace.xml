@@ -5,12 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32b39ae0-63dd-43ac-acbf-d7427c70cf49" name="Changes" comment="XMLExport support for todo">
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoExporter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoXMLExporter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/io/TodoXMLExportTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/DateInputVerifier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/FeedbackTextInputVerifier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/MainFrame.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/Nought.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/RootTodoNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TimeInputVerifier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TodoNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TodoTree.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/Todo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/core/TodoStoreTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/core/TodoStoreTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoImporter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoXMLImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoXMLImporter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +56,7 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="Nought" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
+                <item name="documentation" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -79,33 +86,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultPlantUmlFileTemplate": "Empty",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "WebServerToolWindowFactoryState": "true",
-    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
-    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
-    "WebServerToolWindowPanel.toolwindow.show.date": "false",
-    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
-    "WebServerToolWindowPanel.toolwindow.show.size": "false",
-    "last.edited.regexp": "<?xml version=\"1.0\"?><completed/>",
-    "last_opened_file_path": "D:/.projects/prog3/Nought/src/test/resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultPlantUmlFileTemplate&quot;: &quot;Empty&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
+    &quot;last.edited.regexp&quot;: &quot;&lt;?xml version=\&quot;1.0\&quot;?&gt;&lt;completed/&gt;&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/.projects/prog3/Nought/src/test/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\.projects\prog3\Nought\src\test\resources" />
@@ -116,8 +123,11 @@
       <recent name="D:\.projects\prog3\Nought" />
       <recent name="D:\.projects\prog3\Nought\docs\theme" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="hu.kszi2.nought.gui" />
+    </key>
   </component>
-  <component name="RunManager" selected="Gradle.Nought [test]">
+  <component name="RunManager" selected="Application.Nought">
     <configuration name="Nought" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="hu.kszi2.nought.gui.Nought" />
       <module name="Nought.main" />
@@ -275,7 +285,9 @@
       <workItem from="1667512011832" duration="126000" />
       <workItem from="1667945436831" duration="7083000" />
       <workItem from="1668790618600" duration="21051000" />
-      <workItem from="1668867200974" duration="17452000" />
+      <workItem from="1668867200974" duration="18990000" />
+      <workItem from="1668893017534" duration="6975000" />
+      <workItem from="1668939080641" duration="17740000" />
     </task>
     <task id="LOCAL-00001" summary="core package and start io">
       <created>1668811541155</created>
@@ -326,7 +338,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668885264247</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="XMLExport support for todo">
+      <created>1668885366680</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1668885366680</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -360,15 +379,21 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/hu/kszi2/nought/io/TodoXMLExportTests.java</url>
-          <line>199</line>
-          <properties>
-            <option name="lambda-ordinal" value="0" />
-          </properties>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="30" />
+        </breakpoint>
       </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="java-exception">
+          <properties>
+            <catch-class-filters>
+              <class-filter pattern="hu.kszi2.nought.io.TodoXMLImporter" />
+            </catch-class-filters>
+            <option name="catch-filters-enabled" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
     </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">

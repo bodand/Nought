@@ -129,6 +129,11 @@ public class Todo {
         store.unlink(this);
     }
 
+    @Override
+    public String toString() {
+        return getName();
+    }
+
     public void destroyTree() {
         for (var child : children) {
             store.removeBranchAtId(child);
