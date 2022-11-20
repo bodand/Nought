@@ -3,7 +3,11 @@ package hu.kszi2.nought.core;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Todo {
@@ -90,18 +94,48 @@ public class Todo {
         this.completed = completedParam;
     }
 
+    public void setDueDate(String dueDateStr) throws BadTodoOperation, ParseException {
+        validateDueDateNullity(dueDateStr == null);
+        var fmt = new SimpleDateFormat("yyyy-MM-dd");
+        var date = fmt.parse(dueDateStr);
+        setDueDate(date);
+    }
+
     public void setDueDate(@Nullable Date dueDate) throws BadTodoOperation {
-        if (dueDate == null && dueTime != null) {
-            throw new BadTodoOperation(this, "Due date can not be unset if due time is set");
-        }
+        validateDueDateNullity(dueDate == null);
         this.dueDate = dueDate;
     }
 
-    public void setDueTime(@Nullable LocalTime dueTime) throws BadTodoOperation {
-        if (dueTime != null && dueDate == null) {
-            throw new BadTodoOperation(this, "Due time can only be set after a due date has been set");
+    private void validateDueDateNullity(boolean dateNull) throws BadTodoOperation {
+        if (dateNull && dueTime != null)
+            throw new BadTodoOperation(this, "Due date can not be unset if due time is set");
+    }
+
+    public void setDueTime(String dueTimeStr) throws BadTodoOperation, ParseException {
+        validateDueTimeNullity(dueTimeStr == null);
+        var fmt = DateTimeFormatter.ISO_TIME;
+        try {
+            if (dueTimeStr == null) {
+                setDueTime((@Nullable LocalTime) null);
+                return;
+            }
+            var time = LocalTime.parse(dueTimeStr, fmt);
+            setDueTime(time);
+        } catch (DateTimeParseException ex) {
+            var pe = new ParseException(dueTimeStr, ex.getErrorIndex());
+            pe.initCause(ex);
+            throw pe;
         }
+    }
+
+    public void setDueTime(@Nullable LocalTime dueTime) throws BadTodoOperation {
+        validateDueTimeNullity(dueTime == null);
         this.dueTime = dueTime;
+    }
+
+    private void validateDueTimeNullity(boolean timeNull) throws BadTodoOperation {
+        if (!timeNull && dueDate == null)
+            throw new BadTodoOperation(this, "Due time can only be set after a due date has been set");
     }
 
     public void addChild(@NotNull Todo child) throws IllegalArgumentException {

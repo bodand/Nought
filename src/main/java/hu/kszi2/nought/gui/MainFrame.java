@@ -7,8 +7,6 @@ import org.jetbrains.annotations.*;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.event.UndoableEditEvent;
-import javax.swing.event.UndoableEditListener;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreeSelectionModel;
@@ -182,8 +180,14 @@ public class MainFrame extends JFrame {
         gbc.weightx = .6;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         dueDate = new JTextField();
-        dueDate.setInputVerifier(new DateInputVerifier()); // #TODO fix setter/getter
-//        dueDate.getDocument().addDocumentListener(new FieldUpdateListener(dueDate::getText, Todo::setDueDate));
+        dueDate.getDocument().addDocumentListener(new FieldUpdateListener(dueDate::getText,
+                (todo, value) -> {
+                    try {
+                        todo.setDueDate(value);
+                    } catch (Exception ex) {
+                        /* ignore */
+                    }
+                }));
         add(dueDate, gbc.clone());
         gbc.gridx = 1;
         gbc.gridy = 3;
@@ -195,9 +199,17 @@ public class MainFrame extends JFrame {
         gbc.weightx = .6;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         dueTime = new JTextField();
-        dueTime.setInputVerifier(new TimeInputVerifier()); // #TODO fix setter/getter
 //        dueTime.getDocument().addDocumentListener(new FieldUpdateListener(dueTime::getText, Todo::setName));
         add(dueTime, gbc.clone());
+
+        dueTime.setInputVerifier(new CompoundInputVerifier(
+                new TimeInputVerifier(),
+                new DateTimeIntegrityVerifier(dueDate, dueTime)
+        ));
+        dueDate.setInputVerifier(new CompoundInputVerifier(
+                new DateInputVerifier(),
+                new DateTimeIntegrityVerifier(dueDate, dueTime)
+        ));
 
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -319,19 +331,19 @@ public class MainFrame extends JFrame {
     }
 
     private void newRoot() {
-
+        // #TODO implement
     }
 
     private void newChild() {
-
+        // #TODO implement
     }
 
     private void deleteSelected() {
-
+        // #TODO implement
     }
 
     private void deleteSelectedTree() {
-
+        // #TODO implement
     }
 
     private void changeCurrentFile(@NotNull File file) {

@@ -7,6 +7,7 @@ public class TimeInputVerifier extends FeedbackTextInputVerifier {
     @Override
     protected boolean verifyImpl(String input) {
         try {
+            if (input.isEmpty()) return true; // empty string is a valid time
             format.parse(input);
             return true;
         } catch (DateTimeParseException ex) {
@@ -14,5 +15,5 @@ public class TimeInputVerifier extends FeedbackTextInputVerifier {
         }
     }
 
-    private final DateTimeFormatter format = DateTimeFormatter.ISO_TIME;
+    private static final DateTimeFormatter format = DateTimeFormatter.ISO_TIME;
 }

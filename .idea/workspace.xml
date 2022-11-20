@@ -4,20 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32b39ae0-63dd-43ac-acbf-d7427c70cf49" name="Changes" comment="XMLExport support for todo">
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/DateInputVerifier.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/FeedbackTextInputVerifier.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/MainFrame.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/Nought.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/RootTodoNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TimeInputVerifier.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TodoNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TodoTree.java" afterDir="false" />
+    <list default="true" id="32b39ae0-63dd-43ac-acbf-d7427c70cf49" name="Changes" comment="mostly main frame, wiring is still needed">
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/CompoundInputVerifier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/DateTimeIntegrityVerifier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/Todo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoImporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoXMLImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoXMLImporter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/DateInputVerifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/DateInputVerifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TimeInputVerifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TimeInputVerifier.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -287,7 +281,7 @@
       <workItem from="1668790618600" duration="21051000" />
       <workItem from="1668867200974" duration="18990000" />
       <workItem from="1668893017534" duration="6975000" />
-      <workItem from="1668939080641" duration="17740000" />
+      <workItem from="1668939080641" duration="20732000" />
     </task>
     <task id="LOCAL-00001" summary="core package and start io">
       <created>1668811541155</created>
@@ -345,7 +339,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668885366680</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="mostly main frame, wiring is still needed">
+      <created>1668966599348</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1668966599348</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,7 +375,8 @@
     <MESSAGE value="update XSD file to allow unbounded todo references" />
     <MESSAGE value="update Gradle script:" />
     <MESSAGE value="XMLExport support for todo" />
-    <option name="LAST_COMMIT_MESSAGE" value="XMLExport support for todo" />
+    <MESSAGE value="mostly main frame, wiring is still needed" />
+    <option name="LAST_COMMIT_MESSAGE" value="mostly main frame, wiring is still needed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -383,6 +385,11 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="30" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/DateTimeIntegrityVerifier.java</url>
+          <line>14</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="java-exception">
