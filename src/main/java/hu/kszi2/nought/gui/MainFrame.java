@@ -1,5 +1,6 @@
 package hu.kszi2.nought.gui;
 
+import hu.kszi2.nought.core.BadTodoOperation;
 import hu.kszi2.nought.core.Todo;
 import hu.kszi2.nought.core.TodoStore;
 import org.jetbrains.annotations.*;
@@ -199,7 +200,14 @@ public class MainFrame extends JFrame {
         gbc.weightx = .6;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         dueTime = new JTextField();
-//        dueTime.getDocument().addDocumentListener(new FieldUpdateListener(dueTime::getText, Todo::setName));
+        dueTime.getDocument().addDocumentListener(new FieldUpdateListener(dueTime::getText,
+                (todo, value) -> {
+                    try {
+                        todo.setDueTime(value);
+                    } catch (Exception ex) {
+                        /* ignore */
+                    }
+                }));
         add(dueTime, gbc.clone());
 
         dueTime.setInputVerifier(new CompoundInputVerifier(
@@ -217,6 +225,14 @@ public class MainFrame extends JFrame {
         gbc.anchor = GridBagConstraints.LINE_START;
         gbc.fill = GridBagConstraints.NONE;
         completed = new JCheckBox("Completed");
+        completed.addActionListener(ae -> {
+            try {
+                if (edited != null)
+                    edited.setCompleted(completed.isSelected());
+            } catch (BadTodoOperation ex) {
+                /* ignore */
+            }
+        });
         add(completed, gbc.clone());
 
         gbc.gridx = 0;
@@ -347,6 +363,7 @@ public class MainFrame extends JFrame {
     }
 
     private void changeCurrentFile(@NotNull File file) {
+        changeEdited(null);
         setTitle("Nought - " + file.getName());
         currentFile = file;
     }
@@ -387,7 +404,16 @@ public class MainFrame extends JFrame {
         } else {
             dueDate.setText("");
         }
-        completed.setEnabled(true);
+
+        var childrenOk = todo.getChildren().stream()
+                .map(id -> store.findById(id))
+                .allMatch(Todo::isCompleted);
+        var parent = todo.getParent();
+        boolean parentOk = true;
+        if (parent != null) {
+            parentOk = !parent.isCompleted();
+        }
+        completed.setEnabled(childrenOk && parentOk);
         completed.setSelected(edited.isCompleted());
 
         addNew.setEnabled(true);
