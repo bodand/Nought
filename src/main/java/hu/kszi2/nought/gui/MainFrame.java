@@ -6,54 +6,20 @@ import hu.kszi2.nought.core.TodoStore;
 import org.jetbrains.annotations.*;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
-import java.util.function.BiConsumer;
-import java.util.function.Supplier;
 
 public class MainFrame extends JFrame {
-    private class FieldUpdateListener implements DocumentListener {
-        public FieldUpdateListener(Supplier<String> inputLens,
-                                   BiConsumer<Todo, String> todoLens) {
-            this.inputLens = inputLens;
-            this.todoLens = todoLens;
-        }
-
-        @Override
-        public void insertUpdate(DocumentEvent e) {
-            updateField();
-        }
-
-        @Override
-        public void removeUpdate(DocumentEvent e) {
-            updateField();
-        }
-
-        @Override
-        public void changedUpdate(DocumentEvent e) {
-            updateField();
-        }
-
-        private void updateField() {
-            if (edited != null) {
-                todoLens.accept(edited, inputLens.get());
-                ((DefaultTreeModel) tree.getModel()).reload(((TreeNode) tree.getLastSelectedPathComponent()));
-            }
-        }
-
-        private final Supplier<String> inputLens;
-        private final BiConsumer<Todo, String> todoLens;
-    }
-
     public MainFrame(TodoStore store) {
         this.store = store;
         try {
@@ -65,7 +31,13 @@ public class MainFrame extends JFrame {
 
             setTitle("Nought");
             setSize(700, 350);
-            setDefaultCloseOperation(EXIT_ON_CLOSE);
+            setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+            addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    closeSelf();
+                }
+            });
             setVisible(true);
             changeEdited(null);
         } catch (Exception ex) {
@@ -75,55 +47,80 @@ public class MainFrame extends JFrame {
     }
 
     private void constructMenuBar() {
-        var mb = new MenuBar();
-        var fileMenu = new Menu("File");
-        var todoMenu = new Menu("Todo");
+        var jmb = new JMenuBar();
+        var fileMenu = new JMenu("File");
+        fileMenu.setMnemonic(KeyEvent.VK_F);
+        var todoMenu = new JMenu("Todo");
+        todoMenu.setMnemonic(KeyEvent.VK_T);
 
         // File //
         // File > Save
-        var save = new MenuItem("Save");
-        save.addActionListener(ae -> saveStore());
-        fileMenu.add(save);
+        JMenuItem saveMenu = new JMenuItem("Save", KeyEvent.VK_S);
+        saveMenu.setAccelerator(KeyStroke.getKeyStroke("control S"));
+        saveMenu.addActionListener(ae -> saveStore());
+        fileMenu.add(saveMenu);
         // File > SaveAs
-        var saveAs = new MenuItem("Save as");
-        saveAs.addActionListener(ae -> saveStoreAs());
-        fileMenu.add(saveAs);
+        JMenuItem saveAsMenu = new JMenuItem("Save as", KeyEvent.VK_A);
+        saveAsMenu.setAccelerator(KeyStroke.getKeyStroke("control shift S"));
+        saveAsMenu.addActionListener(ae -> saveStoreAs());
+        fileMenu.add(saveAsMenu);
         // --
-        fileMenu.add("-");
+        fileMenu.addSeparator();
         // File > Load
-        var load = new MenuItem("Load");
+        var load = new JMenuItem("Load", KeyEvent.VK_L);
+        load.setAccelerator(KeyStroke.getKeyStroke("control L"));
         load.addActionListener(ae -> loadNewStore());
         fileMenu.add(load);
         // --
-        fileMenu.add("-");
+        fileMenu.addSeparator();
         // File > Exit
-        var exit = new MenuItem("Exit");
-        exit.addActionListener(ae -> dispose());
+        var exit = new JMenuItem("Exit", KeyEvent.VK_X);
+        exit.setAccelerator(KeyStroke.getKeyStroke("control Q"));
+        exit.addActionListener(ae -> closeSelf());
         fileMenu.add(exit);
 
         // Todo //
         // Todo > New
-        var newRoot = new MenuItem("New");
+        var newRoot = new JMenuItem("New", KeyEvent.VK_N);
         newRoot.addActionListener(ae -> newRoot());
+        newRoot.setAccelerator(KeyStroke.getKeyStroke("control shift N"));
         todoMenu.add(newRoot);
         // Todo > New dependent
-        var newTodo = new MenuItem("New dependent");
-        newTodo.addActionListener(ae -> newChild());
-        todoMenu.add(newTodo);
+        newTodoMenu = new JMenuItem("New dependent", KeyEvent.VK_D);
+        newTodoMenu.addActionListener(ae -> newChild());
+        newTodoMenu.setAccelerator(KeyStroke.getKeyStroke("control N"));
+        todoMenu.add(newTodoMenu);
         // --
-        todoMenu.add("-");
+        todoMenu.addSeparator();
         // Todo > Delete
-        var delete = new MenuItem("Delete");
-        delete.addActionListener(ae -> deleteSelected());
-        todoMenu.add(delete);
+        deleteMenu = new JMenuItem("Delete", KeyEvent.VK_D);
+        deleteMenu.addActionListener(ae -> deleteSelected());
+        deleteMenu.setAccelerator(KeyStroke.getKeyStroke("control D"));
+        todoMenu.add(deleteMenu);
         // Todo > Delete with children
-        var deleteTree = new MenuItem("Delete with children");
-        deleteTree.addActionListener(ae -> deleteSelectedTree());
-        todoMenu.add(deleteTree);
+        deleteTreeMenu = new JMenuItem("Delete with subtodoes", KeyEvent.VK_W);
+        deleteTreeMenu.addActionListener(ae -> deleteSelectedTree());
+        deleteTreeMenu.setAccelerator(KeyStroke.getKeyStroke("control shift D"));
+        todoMenu.add(deleteTreeMenu);
 
-        mb.add(fileMenu);
-        mb.add(todoMenu);
-        setMenuBar(mb);
+        jmb.add(fileMenu);
+        jmb.add(todoMenu);
+        setJMenuBar(jmb);
+    }
+
+    private void closeSelf() {
+        if (!saved) {
+            var yes = 0;
+            var cancel = 2;
+            var userSure = JOptionPane.showConfirmDialog(this,
+                    "You have unsaved changes. Would you like to save before exiting?",
+                    "Unsaved progress",
+                    JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+            if (userSure == cancel) return;
+            if (userSure == yes) saveStore();
+        }
+        dispose();
     }
 
     private void constructTodoEditor() {
@@ -143,7 +140,11 @@ public class MainFrame extends JFrame {
         gbc.weightx = .6;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         name = new JTextField();
-        name.getDocument().addDocumentListener(new FieldUpdateListener(name::getText, Todo::setName));
+        name.getDocument().addDocumentListener(new FieldUpdateListener<>(this::getEdited, name::getText,
+                (todo, value) -> {
+                    todo.setName(value);
+                    reloadTreeAtSelected();
+                }));
         add(name, gbc.clone());
 
         gbc.insets = new Insets(3, 8, 3, 8);
@@ -160,7 +161,7 @@ public class MainFrame extends JFrame {
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         description = new JTextArea();
-        description.getDocument().addDocumentListener(new FieldUpdateListener(description::getText, Todo::setDescription));
+        description.getDocument().addDocumentListener(new FieldUpdateListener<>(this::getEdited, description::getText, Todo::setDescription));
         add(new JScrollPane(description), gbc.clone());
 
         gbc.gridx = 0;
@@ -181,7 +182,7 @@ public class MainFrame extends JFrame {
         gbc.weightx = .6;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         dueDate = new JTextField();
-        dueDate.getDocument().addDocumentListener(new FieldUpdateListener(dueDate::getText,
+        dueDate.getDocument().addDocumentListener(new FieldUpdateListener<>(this::getEdited, dueDate::getText,
                 (todo, value) -> {
                     try {
                         todo.setDueDate(value);
@@ -200,7 +201,7 @@ public class MainFrame extends JFrame {
         gbc.weightx = .6;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         dueTime = new JTextField();
-        dueTime.getDocument().addDocumentListener(new FieldUpdateListener(dueTime::getText,
+        dueTime.getDocument().addDocumentListener(new FieldUpdateListener<>(this::getEdited, dueTime::getText,
                 (todo, value) -> {
                     try {
                         todo.setDueTime(value);
@@ -227,8 +228,11 @@ public class MainFrame extends JFrame {
         completed = new JCheckBox("Completed");
         completed.addActionListener(ae -> {
             try {
-                if (edited != null)
+                if (edited != null) {
                     edited.setCompleted(completed.isSelected());
+                    newTodoMenu.setEnabled(!completed.isEnabled());
+                    addSubtodo.setEnabled(!completed.isSelected());
+                }
             } catch (BadTodoOperation ex) {
                 /* ignore */
             }
@@ -241,6 +245,7 @@ public class MainFrame extends JFrame {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(3, 8, 8, 8);
         addSubtodo = new JButton("Add subtodo");
+        addSubtodo.addActionListener(ae -> newChild());
         add(addSubtodo, gbc.clone());
         gbc.gridx = 1;
         gbc.gridwidth = 2;
@@ -248,11 +253,14 @@ public class MainFrame extends JFrame {
         gbc.anchor = GridBagConstraints.LINE_START;
         gbc.fill = GridBagConstraints.NONE;
         remove = new JButton("Remove");
+        remove.addActionListener(ae -> deleteSelected());
         add(remove, gbc);
     }
 
     private void constructTodoExplorer() {
         tree = new JTree(new TodoTree(store));
+        tree.setCellRenderer(new ColoredCellRenderer());
+        tree.getModel().addTreeModelListener(new TreeModificationListener(e -> setSaved(false)));
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         tree.addTreeSelectionListener(e -> {
             var path = e.getNewLeadSelectionPath();
@@ -270,7 +278,8 @@ public class MainFrame extends JFrame {
                         new Insets(8, 0, 3, 8),
                         0, 0));
 
-        addNew = new JButton("New");
+        JButton addNew = new JButton("New");
+        addNew.addActionListener(ae -> newRoot());
         add(addNew,
                 new GridBagConstraints(3, 5, 1, 1, 0.0, 0.0,
                         GridBagConstraints.LINE_START,
@@ -294,6 +303,7 @@ public class MainFrame extends JFrame {
             var todoTree = new TodoTree(store);
             tree.setModel(todoTree);
         } catch (Exception ex) {
+            ex.printStackTrace();
             JOptionPane.showMessageDialog(
                     this,
                     "Could not open file: \n" + ex.getMessage(),
@@ -324,13 +334,13 @@ public class MainFrame extends JFrame {
         try {
             var exporter = store.newExporter();
             exporter.export(new FileWriter(file));
+            setSaved(true);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(
                     this,
                     "Could not save to file " + file + ":\n" + ex.getMessage(),
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
-
         }
     }
 
@@ -347,24 +357,77 @@ public class MainFrame extends JFrame {
     }
 
     private void newRoot() {
-        // #TODO implement
+        var built = getNewTodo();
+        if (built == null) return;
+
+        var treeModel = (TodoTree) tree.getModel();
+        treeModel.addRootTodo(built);
+        treeModel.reload();
     }
 
     private void newChild() {
-        // #TODO implement
+        var built = getNewTodo();
+        if (built == null) return;
+
+        var treeModel = (TodoTree) tree.getModel();
+        var node = ((TodoNode) tree.getLastSelectedPathComponent());
+        treeModel.addTodoAsChildToNode(node, built, true);
+        treeModel.reload();
+    }
+
+    @Nullable
+    private Todo getNewTodo() {
+        var todoDlg = new NewTodoDialog(this, store.newBuilder());
+        todoDlg.setLocationRelativeTo(this);
+        todoDlg.setVisible(true);
+        return todoDlg.getBuilt();
     }
 
     private void deleteSelected() {
-        // #TODO implement
+        try {
+            if (edited != null) {
+                var id = edited.getId();
+                store.removeById(id);
+
+                var node = (TodoNode) tree.getLastSelectedPathComponent();
+                ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(node);
+                changeEdited(null);
+            }
+        } catch (BadTodoOperation ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Cannot delete node with subtodos.\n" +
+                            "See [Todo > Delete with subtodos] for purging a whole subtree.",
+                    "Error - Children",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void deleteSelectedTree() {
-        // #TODO implement
+        if (edited != null) {
+            var yes = 0;
+            var userSure = JOptionPane.showConfirmDialog(this,
+                    "Are you sure you want to remove this with all its subtodoes?",
+                    "Mass todo removal",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+            if (userSure != yes) return;
+
+            var id = edited.getId();
+            store.removeBranchAtId(id);
+
+            var node = (TodoNode) tree.getLastSelectedPathComponent();
+            ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(node);
+            changeEdited(null);
+        }
     }
 
     private void changeCurrentFile(@NotNull File file) {
         changeEdited(null);
-        setTitle("Nought - " + file.getName());
+        var titleBuilder = new StringBuilder();
+        if (!saved) titleBuilder.append("*");
+        titleBuilder.append("Nought - ");
+        titleBuilder.append(file.getName());
+        setTitle(titleBuilder.toString());
         currentFile = file;
     }
 
@@ -381,9 +444,11 @@ public class MainFrame extends JFrame {
             dueDate.setText("");
             completed.setEnabled(false);
             completed.setSelected(false);
-            addNew.setEnabled(false);
             addSubtodo.setEnabled(false);
             remove.setEnabled(false);
+            newTodoMenu.setEnabled(false);
+            deleteMenu.setEnabled(false);
+            deleteTreeMenu.setEnabled(false);
             return;
         }
         name.setEnabled(true);
@@ -416,12 +481,41 @@ public class MainFrame extends JFrame {
         completed.setEnabled(childrenOk && parentOk);
         completed.setSelected(edited.isCompleted());
 
-        addNew.setEnabled(true);
-        addSubtodo.setEnabled(true);
+        addSubtodo.setEnabled(!edited.isCompleted());
         remove.setEnabled(true);
+        newTodoMenu.setEnabled(true);
+        deleteMenu.setEnabled(true);
+        deleteTreeMenu.setEnabled(true);
     }
 
-    private transient TodoStore store;
+    public Todo getEdited() {
+        return edited;
+    }
+
+    public void reloadTreeAtSelected() {
+        if (edited != null) {
+            ((DefaultTreeModel) tree.getModel()).reload(((TreeNode) tree.getLastSelectedPathComponent()));
+        }
+    }
+
+    private void setSaved(boolean saved) {
+        if (!saved) {
+            if (!getTitle().startsWith("*")) {
+                setTitle("*" + getTitle());
+            }
+        } else {
+            if (getTitle().startsWith("*")) {
+                setTitle(getTitle().substring(1));
+            }
+        }
+        this.saved = saved;
+    }
+
+    private boolean saved = true;
+    private JMenuItem deleteTreeMenu;
+    private JMenuItem deleteMenu;
+    private JMenuItem newTodoMenu;
+    private TodoStore store;
     private JTree tree;
     private JTextField name;
     private JTextArea description;
@@ -431,7 +525,6 @@ public class MainFrame extends JFrame {
 
     private JButton addSubtodo;
     private JButton remove;
-    private JButton addNew;
-    private transient Todo edited;
+    private Todo edited;
     private File currentFile;
 }

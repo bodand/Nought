@@ -1,12 +1,13 @@
 package hu.kszi2.nought.core;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class TodoBuilder {
+public class TodoBuilder implements Serializable {
     TodoBuilder(TodoStore store) {
         this.store = store;
     }

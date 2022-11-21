@@ -5,9 +5,10 @@ import hu.kszi2.nought.io.TodoImporter;
 import hu.kszi2.nought.io.TodoXMLExporter;
 import hu.kszi2.nought.io.TodoXMLImporter;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class TodoStore {
+public class TodoStore implements Serializable {
     public TodoBuilder newBuilder() {
         return new TodoBuilder(this);
     }

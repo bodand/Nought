@@ -1,13 +1,9 @@
 package hu.kszi2.nought.gui;
 
 import hu.kszi2.nought.core.Todo;
-import hu.kszi2.nought.core.TodoStore;
 
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreeNode;
-import java.util.Enumeration;
-import java.util.UUID;
-import java.util.Vector;
+import javax.swing.tree.MutableTreeNode;
 
 public class TodoNode extends DefaultMutableTreeNode {
     protected TodoNode(Object obj) {
@@ -20,12 +16,23 @@ public class TodoNode extends DefaultMutableTreeNode {
         this.todo = todo;
     }
 
+    public void add(MutableTreeNode newChild, boolean linkToParent) {
+        super.add(newChild);
+        if (linkToParent && todo != null)
+            todo.addChild(((TodoNode) newChild).getTodo());
+    }
+
     public Todo getTodo() {
         return todo;
     }
 
+    public boolean completedTodo() {
+        return todo.isCompleted();
+    }
+
     @Override
     public String toString() {
+        if (todo == null) return "(Unknown todo)";
         return todo.getName();
     }
 

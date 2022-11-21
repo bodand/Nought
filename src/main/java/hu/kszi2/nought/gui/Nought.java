@@ -14,7 +14,7 @@ public class Nought {
                 }
             }
         } catch (Exception e) {
-            // If Nimbus is not available, you can set the GUI to another look and feel.
+            /* proceed with default */
         }
 
         var store = new TodoStore();

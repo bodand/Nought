@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.*;
 
 import java.time.LocalTime;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -78,7 +79,7 @@ class TodoTests {
         todo.setDueTime(LocalTime.NOON);
 
         var caught = assertThrows(BadTodoOperation.class,
-                () -> todo.setDueDate(null));
+                () -> todo.setDueDate(((Date) null)));
 
         assertTrue(caught.getMessage().contains(todo.getName()));
         assertTrue(caught.getMessage().contains("date"));

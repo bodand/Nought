@@ -4,7 +4,6 @@ import hu.kszi2.nought.core.Todo;
 import hu.kszi2.nought.core.TodoStore;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import java.util.HashSet;
 
@@ -28,21 +27,30 @@ public class TodoTree extends DefaultTreeModel {
             roots.add(todo);
         }
 
-        var rootest = ((DefaultMutableTreeNode) getRoot());
+        var rootest = ((TodoNode) getRoot());
         it = roots.iterator();
         while (it.hasNext()) {
             var todo = it.next();
-            addTodoAsChildToNode(rootest, todo);
+            addTodoAsChildToNode(rootest, todo, false);
         }
     }
 
-    private void addTodoAsChildToNode(@NotNull DefaultMutableTreeNode node,
-                                      Todo todo) {
+    public void addRootTodo(Todo todo) {
+        var node = new TodoNode(todo);
+        var rootest = ((TodoNode) getRoot());
+        rootest.add(node);
+    }
+
+    public void addTodoAsChildToNode(@NotNull TodoNode node,
+                                     Todo todo, boolean linkToParent) {
         var todoNode = new TodoNode(todo);
-        node.add(todoNode);
-        todo.getChildren().stream()
-                .map(store::findById)
-                .forEach(child -> addTodoAsChildToNode(todoNode, child));
+        node.add(todoNode, linkToParent);
+        var it = todo.getChildren().stream()
+                .map(store::findById).iterator();
+        while (it.hasNext()) {
+            var child = it.next();
+            addTodoAsChildToNode(todoNode, child, false);
+        }
     }
 
     private final transient TodoStore store;

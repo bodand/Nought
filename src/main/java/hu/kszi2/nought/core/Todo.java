@@ -3,6 +3,7 @@ package hu.kszi2.nought.core;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -10,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.*;
 
-public class Todo {
+public class Todo implements Serializable {
     Todo(@NotNull TodoStore store,
          @NotNull UUID id,
          @NotNull String name,
@@ -161,6 +162,15 @@ public class Todo {
     public void destroy() throws BadTodoOperation {
         if (!children.isEmpty()) throw new BadTodoOperation(this, "cannot destroy todo with children");
         store.unlink(this);
+
+        var parent = getParent();
+        if (parent != null) {
+            parent.removeChild(id);
+        }
+    }
+
+    private void removeChild(UUID id) {
+        children.remove(id);
     }
 
     @Override

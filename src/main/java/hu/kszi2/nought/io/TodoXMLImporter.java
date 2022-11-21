@@ -30,6 +30,8 @@ public class TodoXMLImporter
     public TodoStore importFrom(InputStream strm)
             throws ParserConfigurationException, SAXException, IOException {
         var sax = SAXParserFactory.newInstance();
+        sax.setFeature("http://xml.org/sax/features/external-general-entities", false);
+        sax.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
         var parser = sax.newSAXParser();
         parser.parse(strm, this);
         return store;
