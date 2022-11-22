@@ -151,6 +151,11 @@ class TodoXMLExportTests {
     }
 
     @Test
+    void defaultIsNotNull() {
+        assertNotNull(TodoExporter.newDefault(store));
+    }
+
+    @Test
     void singleDuedChildlessTodoStoreContainsDueDate() throws Exception {
         final var EOT = "2038-01-19";
         var todo = store.newBuilder()

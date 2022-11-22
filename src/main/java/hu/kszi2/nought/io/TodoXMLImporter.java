@@ -37,6 +37,12 @@ public class TodoXMLImporter
         return store;
     }
 
+    /**
+     * Constructs an importer, by setting the store to put the parsed todos into, and internally
+     * sets up the required element handlers.
+     *
+     * @param todoStore The store to parse the XML into
+     */
     public TodoXMLImporter(TodoStore todoStore) {
         store = todoStore;
         elementHandlers.put("todo", attributes -> {
@@ -69,31 +75,56 @@ public class TodoXMLImporter
                 attributes -> nextTextCallback = this::addCompleted);
     }
 
-    private void parseDueDate(String s) {
+    /**
+     * Parses a given string as a date of the ISO (long) format ({@code yyyy-MM-dd}) and
+     * if it did not cause an exception, passes it to the function to add it
+     * to the currently parsed todo object.
+     *
+     * @param dateStr The text to parse as a date
+     */
+    private void parseDueDate(String dateStr) {
         try {
             var formatter = new SimpleDateFormat("yyyy-MM-dd");
-            addDueDate(formatter.parse(s));
+            addDueDate(formatter.parse(dateStr));
         } catch (ParseException ex) {
             /* nop */
         }
     }
 
-    private void parseDueTime(String s) {
+    /**
+     * Parses a given string as a time of the ISO format ({@code HH:mm:ss}) and
+     * if it did not cause an exception, passes it to the function to add it
+     * to the currently parsed todo object.
+     *
+     * @param timeStr The text to parse as a time
+     */
+    private void parseDueTime(String timeStr) {
         try {
             var formatter = DateTimeFormatter.ISO_TIME;
-            addDueTime(LocalTime.parse(s, formatter));
+            addDueTime(LocalTime.parse(timeStr, formatter));
         } catch (DateTimeParseException ex) {
             /* nop */
         }
     }
 
-    @Override
-    public void startTodo(UUID id) {
+    /**
+     * Handle a given todo elements start.
+     *
+     * @param id The id of the element encountered.
+     */
+    private void startTodo(UUID id) {
         builder = store.newBuilder().setId(id);
     }
 
-    @Override
-    public Todo endTodo() throws BadTodoOperation {
+    /**
+     * Finish the handling of a todo object.
+     * This uses the previously set state of the importer to produce the appropriate Todo object.
+     *
+     * @return The newly constructed Todo object.
+     * @throws BadTodoOperation If a Todo object could not be constructed while keeping its
+     *                          invariants.
+     */
+    private Todo endTodo() throws BadTodoOperation {
         if (skipEnd) {
             skipEnd = false;
             return null;
@@ -106,40 +137,82 @@ public class TodoXMLImporter
         return null;
     }
 
-    @Override
-    public void addName(String name) {
+    /**
+     * Sets the name of the next built todo.
+     *
+     * @param name The name of the todo
+     */
+    private void addName(String name) {
         builder.setName(name);
     }
 
-    @Override
-    public void addDesc(String name) {
-        builder.setDescription(name);
+    /**
+     * Sets the description of the next built todo.
+     *
+     * @param desc The description of the todo
+     */
+    private void addDesc(String desc) {
+        builder.setDescription(desc);
     }
 
-    @Override
-    public void addDueDate(Date date) {
+    /**
+     * Sets the due date of the next built todo.
+     *
+     * @param date The due date of the todo
+     */
+    private void addDueDate(Date date) {
         builder.setDueDate(date);
     }
 
-    @Override
-    public void addDueTime(LocalTime time) {
+    /**
+     * Sets the due time of the next built todo.
+     *
+     * @param time The due date of the todo
+     */
+    private void addDueTime(LocalTime time) {
         builder.setDueTime(time);
     }
 
-    @Override
-    public void addCompleted(boolean completed) {
+    /**
+     * Sets the completion status of the next built todo.
+     *
+     * @param completed The due date of the todo
+     */
+    private void addCompleted(boolean completed) {
         builder.setCompleted(completed);
     }
 
-    public void addCompleted(String s) {
+    private void addCompleted(String s) {
         addCompleted(true);
     }
 
-    @Override
-    public void addChild(UUID cid) {
+    /**
+     * Adds a child referenced by its identifier to the next built todo.
+     *
+     * @param cid The child todo's identifier
+     */
+    private void addChild(UUID cid) {
         builder.addChild(cid);
     }
 
+    /**
+     * Checks if there is an element handler specified for the given element,
+     * and calls it.
+     * Otherwise, the function is nop.
+     *
+     * @param uri        The Namespace URI, or the empty string if the
+     *                   element has no Namespace URI or if Namespace
+     *                   processing is not being performed.
+     * @param localName  The local name (without prefix), or the
+     *                   empty string if Namespace processing is not being
+     *                   performed.
+     * @param qName      The qualified name (with prefix), or the
+     *                   empty string if qualified names are not available.
+     * @param attributes The attributes attached to the element.  If
+     *                   there are no attributes, it shall be an empty
+     *                   Attributes object.
+     * @throws SAXException If an XML error occurs
+     */
     @Override
     public void startElement(String uri,
                              String localName,
@@ -161,6 +234,17 @@ public class TodoXMLImporter
         }
     }
 
+    /**
+     * If a text callback has been previously set in the importer, calls it with the found list
+     * of characters.
+     * If the callback does not throw, it is unset again, marking it completed.
+     *
+     * @param ch     The characters.
+     * @param start  The start position in the character array.
+     * @param length The number of characters to use from the
+     *               character array.
+     * @throws SAXException If an XML error occurs
+     */
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         var str = new String(ch, start, length);

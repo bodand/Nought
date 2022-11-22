@@ -172,7 +172,7 @@ A `TodoXMLExporter` osztály, értelem szerűen ezt XML formátumban teszi meg, 
 Ennek ellentétesen a `TodoImporter` és `TodoXMLImporter` adott `InputStream` folyamból tudják beolvasni egy `TodoStore` tartalmát.
 A `TodoXMLImporter` szintén XML formátumból, ugyanabból a sémából.
 
->IO<
+image::docs/IO.png[]
 
 ==== GUI
 

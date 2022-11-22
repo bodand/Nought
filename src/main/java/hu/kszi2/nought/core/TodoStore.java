@@ -2,8 +2,6 @@ package hu.kszi2.nought.core;
 
 import hu.kszi2.nought.io.TodoExporter;
 import hu.kszi2.nought.io.TodoImporter;
-import hu.kszi2.nought.io.TodoXMLExporter;
-import hu.kszi2.nought.io.TodoXMLImporter;
 
 import java.io.Serializable;
 import java.util.*;
@@ -24,37 +22,25 @@ public class TodoStore implements Serializable {
     }
 
     /**
-     * <p>
      * Returns a {@link TodoImporter} object associated with this store object, using the default
      * implementation used by the store.
-     * </p>
-     * <p>
-     * As of version 1.0, the default is {@link TodoXMLImporter}.
-     * </p>
      *
      * @return A new importer
      * @see TodoImporter
-     * @see TodoXMLImporter
      */
     public TodoImporter newImporter() {
-        return new TodoXMLImporter(this);
+        return TodoImporter.newDefault(this);
     }
 
     /**
-     * <p>
      * Returns a {@link TodoExporter} object associated with this store object, using the default
      * implementation used by the store.
-     * </p>
-     * <p>
-     * As of version 1.0, the default is {@link TodoXMLExporter}.
-     * </p>
      *
      * @return A new exporter
      * @see TodoExporter
-     * @see TodoXMLExporter
      */
     public TodoExporter newExporter() {
-        return new TodoXMLExporter(this);
+        return TodoExporter.newDefault(this);
     }
 
     /**

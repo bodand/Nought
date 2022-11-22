@@ -26,6 +26,11 @@ class TodoXMLImportTests {
     }
 
     @Test
+    void defaultIsNotNull() {
+        assertNotNull(TodoImporter.newDefault(new TodoStore()));
+    }
+
+    @Test
     void emptyTodosListCreatesEmptyStore() throws Exception {
         var store = mock(TodoStore.class);
         @Language("XML") var data = """
