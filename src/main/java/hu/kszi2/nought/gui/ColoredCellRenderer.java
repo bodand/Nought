@@ -4,18 +4,21 @@ import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import java.awt.*;
 
+/**
+ * Special TreeCellRender that sets the font color for TreeNode render elements
+ * whose Todo instance is completed.
+ */
 public class ColoredCellRenderer extends DefaultTreeCellRenderer {
     @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
-       if (value instanceof TodoNode todo) {
-            var def = super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
+        var def = super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
 
-            if (todo.completedTodo() && !selected) {
-                def.setForeground(new Color(156, 177, 158));
-            }
-            return def;
+        if (value instanceof TodoNode todo
+                && todo.completedTodo()
+                && !selected) {
+            def.setForeground(new Color(156, 177, 158));
         }
-        // should not happen
-        return super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
+
+        return def;
     }
 }

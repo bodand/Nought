@@ -4,7 +4,15 @@ import hu.kszi2.nought.core.TodoStore;
 
 import javax.swing.*;
 
+/**
+ * Class containing the main entry point to the Nought application.
+ */
 public class Nought {
+    /**
+     * The main entry point.
+     *
+     * @param args CLI parameters
+     */
     public static void main(String[] args) {
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -14,6 +22,7 @@ public class Nought {
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
             /* proceed with default */
         }
 

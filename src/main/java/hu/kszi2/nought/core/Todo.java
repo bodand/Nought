@@ -265,6 +265,10 @@ public class Todo implements Serializable {
      */
     public void setDueDate(@Nullable String dueDateStr) throws BadTodoOperation, ParseException {
         validateDueDateNullity(dueDateStr == null);
+        if (dueDateStr == null) {
+            setDueDate((Date) null);
+            return;
+        }
         var fmt = new SimpleDateFormat("yyyy-MM-dd");
         var date = fmt.parse(dueDateStr);
         setDueDate(date);

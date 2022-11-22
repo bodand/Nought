@@ -4,7 +4,18 @@ import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import java.util.function.Consumer;
 
+/**
+ * Universal modification listener for JTree models.
+ * Joins all three events into a single callback provided at construction, for
+ * when it is irrelevant which event occurs.
+ */
 public class TreeModificationListener implements TreeModelListener {
+    /**
+     * Constructs the TreeModificationListener with the provided callback which
+     * will then be called upon any tree modification event.
+     *
+     * @param callback The event callback
+     */
     public TreeModificationListener(Consumer<TreeModelEvent> callback) {
         this.callback = callback;
     }

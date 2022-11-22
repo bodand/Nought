@@ -4,19 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32b39ae0-63dd-43ac-acbf-d7427c70cf49" name="Changes" comment="core docs">
+    <list default="true" id="32b39ae0-63dd-43ac-acbf-d7427c70cf49" name="Changes" comment="io docs">
+      <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/gui/ColoredCellRendererTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/gui/CompoundInputVerifierTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/gui/DateInputVerifierTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/gui/DateTimeIntegrityVerifierTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/gui/FieldUpdateListenerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/gui/RootTodoNodeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/gui/TimeInputVerifierTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/gui/TodoNodeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/gui/TodoTreeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/gui/TreeModificationListenerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Nought.uml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Nought.uml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/nought-docs.adoc" beforeDir="false" afterPath="$PROJECT_DIR$/docs/nought-docs.adoc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoExporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoExporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoImporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoXMLExporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoXMLExporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoXMLImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoXMLImporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/xml/ElementHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/xml/ElementHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/xml/TextCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/xml/TextCallback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/io/TodoXMLExportTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/io/TodoXMLExportTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/io/TodoXMLImportTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/io/TodoXMLImportTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/Todo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/ColoredCellRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/ColoredCellRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/CompoundInputVerifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/CompoundInputVerifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/DateInputVerifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/DateInputVerifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/DateTimeIntegrityVerifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/DateTimeIntegrityVerifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/FeedbackTextInputVerifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/FeedbackTextInputVerifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/FieldUpdateListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/FieldUpdateListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/NewTodoDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/NewTodoDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/Nought.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/Nought.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/RootTodoNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/RootTodoNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TimeInputVerifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TimeInputVerifier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TodoNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TodoNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TodoTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TodoTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TreeModificationListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TreeModificationListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/core/TodoTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/core/TodoTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +84,7 @@
         <option value="Empty" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -97,6 +112,8 @@
     "WebServerToolWindowPanel.toolwindow.show.date": "false",
     "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
     "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "last.edited.regexp": "<?xml version=\"1.0\"?><completed/>",
     "last_opened_file_path": "D:/_build-area/spark",
     "node.js.detected.package.eslint": "true",
@@ -121,7 +138,13 @@
       <recent name="D:\.projects\prog3\Nought" />
       <recent name="D:\.projects\prog3\Nought\docs\theme" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="MoveInnerDialog.RECENTS_KEY">
+      <recent name="hu.kszi2.nought.gui" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
       <recent name="hu.kszi2.nought.gui" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -291,7 +314,7 @@
       <workItem from="1668939080641" duration="21871000" />
       <workItem from="1668978889167" duration="6068000" />
       <workItem from="1669023448403" duration="15319000" />
-      <workItem from="1669129493322" duration="18618000" />
+      <workItem from="1669129493322" duration="26948000" />
     </task>
     <task id="LOCAL-00001" summary="core package and start io">
       <created>1668811541155</created>
@@ -391,7 +414,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669141672470</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="io docs">
+      <created>1669148193902</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1669148193902</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -425,7 +455,8 @@
     <MESSAGE value="completion check &amp; button activation if todo can be completed" />
     <MESSAGE value="done?" />
     <MESSAGE value="core docs" />
-    <option name="LAST_COMMIT_MESSAGE" value="core docs" />
+    <MESSAGE value="io docs" />
+    <option name="LAST_COMMIT_MESSAGE" value="io docs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -457,7 +488,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Nought$TodoXMLTests_todoStoreContainsCorrectChildrenAfterParsing.ic" NAME="TodoXMLTests.todoStoreContainsCorrectChildrenAfterParsing Coverage Results" MODIFIED="1668809780195" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Nought$Nought__test_.ic" NAME="Nought [test] Coverage Results" MODIFIED="1669147127627" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Nought$Nought__test_.ic" NAME="Nought [test] Coverage Results" MODIFIED="1669157554979" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Nought$Nought__check_.ic" NAME="Nought [check] Coverage Results" MODIFIED="1668796429976" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Nought$Nought.ic" NAME="Nought Coverage Results" MODIFIED="1669067556384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>hu.kszi2.nought.core.*</FILTER>

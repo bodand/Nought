@@ -3,12 +3,26 @@ package hu.kszi2.nought.gui;
 import hu.kszi2.nought.core.BadTodoOperation;
 import hu.kszi2.nought.core.Todo;
 import hu.kszi2.nought.core.TodoBuilder;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+/**
+ * The modal dialog box used to create new todo entries.
+ */
 public class NewTodoDialog extends JDialog {
+    /**
+     * Constructs a new dialog window with a parent and the {@link TodoBuilder}
+     * instance to use to construct the new todo object.
+     * The window is modal: interactions with the parent window are blocked
+     * until this window is visible.
+     *
+     * @param parent  The dialog windows parent window
+     * @param builder The builder to build the new todo object with
+     */
     public NewTodoDialog(Frame parent, TodoBuilder builder) {
         super(parent, "Nought - New todo", true);
         this.builder = builder;
@@ -73,7 +87,12 @@ public class NewTodoDialog extends JDialog {
                 new Insets(3, 8, 8, 8), 0, 0));
     }
 
-    private void setCancelShortcut(JButton cancel) {
+    /**
+     * Adds a shortcut on the Esc key to close the dialog window.
+     *
+     * @param cancel The button to handle the escape event
+     */
+    private void setCancelShortcut(@NotNull JButton cancel) {
         cancel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke("ESCAPE"),
                         "shortcutEsc");
@@ -85,12 +104,23 @@ public class NewTodoDialog extends JDialog {
         });
     }
 
+    /**
+     * The action that happens whenever the creation of the todo is cancelled.
+     */
     private void cancelAction() {
         built = null;
         dispose();
     }
 
-    private void setOkShortcut(TodoBuilder builder, JButton ok) {
+    /**
+     * Adds a shortcut on the Ctrl+Enter keys to OK the dialog window, and
+     * create the new todo object.
+     *
+     * @param builder The todo builder object
+     * @param ok      The button to handle the creation event
+     */
+
+    private void setOkShortcut(TodoBuilder builder, @NotNull JButton ok) {
         ok.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke("control ENTER"),
                         "shortcutOk");
@@ -102,7 +132,13 @@ public class NewTodoDialog extends JDialog {
         });
     }
 
-    private void okAction(TodoBuilder builder) {
+    /**
+     * The action that happens whenever the "OK" button was pressed.
+     * The creation of the new todo object.
+     *
+     * @param builder The builder object
+     */
+    private void okAction(@NotNull TodoBuilder builder) {
         try {
             built = builder.build();
             dispose();
@@ -115,11 +151,21 @@ public class NewTodoDialog extends JDialog {
         }
     }
 
-    public TodoBuilder getBuilder() {
+    /**
+     * Returns the builder given at construction.
+     *
+     * @return The builder that is used to build the Todo instance
+     */
+    private TodoBuilder getBuilder() {
         return builder;
     }
 
-    public Todo getBuilt() {
+    /**
+     * Returns the built object, or {@code null} if creation was cancelled.
+     *
+     * @return The build object or {@code null}
+     */
+    public @Nullable Todo getBuilt() {
         return built;
     }
 

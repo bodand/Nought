@@ -68,6 +68,12 @@ class TodoTests {
     }
 
     @Test
+    void dueTimeStringUnsetsTimeIfPassedNull() throws Exception {
+        child.setDueTime(((String) null));
+        assertNull(child.getDueTime());
+    }
+
+    @Test
     void dueTimeStringThrowsIfIsNotOfCorrectFormat() {
         assertThrows(ParseException.class, () -> child.setDueTime("almafa"));
     }
@@ -86,6 +92,13 @@ class TodoTests {
 
         assertTrue(caught.getMessage().contains(todo.getName()));
         assertTrue(caught.getMessage().contains("date"));
+    }
+
+    @Test
+    void dueDateStringUnsetsTimeIfPassedNull() throws Exception {
+        child.setDueTime(((String) null));
+        child.setDueDate(((String) null));
+        assertNull(child.getDueDate());
     }
 
     @Test
