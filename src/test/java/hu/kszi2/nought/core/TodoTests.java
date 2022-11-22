@@ -7,7 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 
+import java.text.ParseException;
 import java.time.LocalTime;
+import java.time.temporal.TemporalField;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
@@ -65,12 +68,38 @@ class TodoTests {
     }
 
     @Test
+    void dueTimeStringThrowsIfIsNotOfCorrectFormat() {
+        assertThrows(ParseException.class, () -> child.setDueTime("almafa"));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"16:20:13", "06:09"})
+    void dueTimeStringSetsValueToCorrectIfIsNotOfCorrectFormat(String time) {
+        assertDoesNotThrow(() -> child.setDueTime(time));
+        assertEquals(time, child.getDueTime().toString());
+    }
+
+    @Test
     void dueTimeCannotBeSetWithoutDate() {
         var caught = assertThrows(BadTodoOperation.class,
                 () -> todo.setDueTime(LocalTime.MIDNIGHT));
 
         assertTrue(caught.getMessage().contains(todo.getName()));
         assertTrue(caught.getMessage().contains("date"));
+    }
+
+    @Test
+    void dueDateStringThrowsIfIsNotOfCorrectFormat() {
+        assertThrows(ParseException.class, () -> child.setDueDate("almafa"));
+    }
+
+    @SuppressWarnings("deprecation")
+    @Test
+    void dueDateStringSetsDateIfIsOfCorrectFormat() {
+        assertDoesNotThrow(() -> child.setDueDate("2022-12-02"));
+        assertEquals(2022, child.getDueDate().getYear() + 1900);
+        assertEquals(11, child.getDueDate().getMonth());
+        assertEquals(2, child.getDueDate().getDate());
     }
 
     @Test
@@ -117,6 +146,12 @@ class TodoTests {
     }
 
     @Test
+    void deletingChildTodoRemovesItFromParentTodo() throws Exception {
+        child.destroy();
+        assertEquals(new ArrayList<UUID>(), todo.getChildren());
+    }
+
+    @Test
     void todoComparesFalseToNotTodoObject() {
         assertNotEquals(todo, (Object) "thing");
     }
@@ -133,7 +168,7 @@ class TodoTests {
         return Stream.of(
                 builder.newId().build(),
                 builder.setId(UUID.fromString("6a98fbfc-dfad-42b2-922e-3859c4064c55")).setCompleted(true).build()
-                );
+        );
     }
 
     private Todo todo;

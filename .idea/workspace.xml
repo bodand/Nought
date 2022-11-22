@@ -5,22 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32b39ae0-63dd-43ac-acbf-d7427c70cf49" name="Changes" comment="done?">
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/ColoredCellRenderer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/FieldUpdateListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/NewTodoDialog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TreeModificationListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Nought.uml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Nought.uml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/nought-spec.adoc" beforeDir="false" afterPath="$PROJECT_DIR$/docs/nought-docs.adoc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/BadTodoOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/BadTodoOperation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/Todo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/Todo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/FeedbackTextInputVerifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/FeedbackTextInputVerifier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/Nought.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/Nought.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/RootTodoNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/RootTodoNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TodoNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TodoNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TodoTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TodoTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoXMLImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoXMLImporter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/io/TodoImporter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/core/TodoTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/core/TodoTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/io/TodoXMLImportTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hu/kszi2/nought/io/TodoXMLImportTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +90,6 @@
     "DefaultPlantUmlFileTemplate": "Empty",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "WebServerToolWindowFactoryState": "true",
     "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
@@ -103,7 +98,7 @@
     "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
     "WebServerToolWindowPanel.toolwindow.show.size": "false",
     "last.edited.regexp": "<?xml version=\"1.0\"?><completed/>",
-    "last_opened_file_path": "D:/.projects/prog3/Nought/src/test/resources",
+    "last_opened_file_path": "D:/_build-area/spark",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -133,7 +128,7 @@
       <recent name="hu.kszi2.nought.gui" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Nought">
+  <component name="RunManager" selected="Gradle.Docs">
     <configuration name="Nought" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="hu.kszi2.nought.gui.Nought" />
       <module name="Nought.main" />
@@ -295,7 +290,8 @@
       <workItem from="1668893017534" duration="6975000" />
       <workItem from="1668939080641" duration="21871000" />
       <workItem from="1668978889167" duration="6068000" />
-      <workItem from="1669023448403" duration="15242000" />
+      <workItem from="1669023448403" duration="15319000" />
+      <workItem from="1669129493322" duration="12096000" />
     </task>
     <task id="LOCAL-00001" summary="core package and start io">
       <created>1668811541155</created>
@@ -374,7 +370,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668974537292</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="done?">
+      <created>1669074843919</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1669074843919</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -420,11 +423,6 @@
           <properties class="java.util.NoSuchElementException" package="java.util" />
           <option name="timeStamp" value="43" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/Todo.java</url>
-          <line>142</line>
-          <option name="timeStamp" value="60" />
-        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="java-exception">
@@ -444,7 +442,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Nought$TodoXMLTests_todoStoreContainsCorrectChildrenAfterParsing.ic" NAME="TodoXMLTests.todoStoreContainsCorrectChildrenAfterParsing Coverage Results" MODIFIED="1668809780195" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Nought$Nought__test_.ic" NAME="Nought [test] Coverage Results" MODIFIED="1669071809926" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/Nought$Nought__test_.ic" NAME="Nought [test] Coverage Results" MODIFIED="1669134914831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Nought$Nought__check_.ic" NAME="Nought [check] Coverage Results" MODIFIED="1668796429976" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Nought$Nought.ic" NAME="Nought Coverage Results" MODIFIED="1669067556384" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>hu.kszi2.nought.core.*</FILTER>

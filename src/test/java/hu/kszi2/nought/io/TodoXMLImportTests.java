@@ -7,9 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
-import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
@@ -23,19 +21,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class TodoXMLImportTests {
     @BeforeEach
-    void setUpStore() {
-        store = new TodoStore();
-    }
-
-    @BeforeEach
     void setUpXMLHandler() {
-        handler = new TodoXMLImporter(store);
-    }
-
-    @BeforeEach
-    void setUpParser() throws Exception {
-        var sax = SAXParserFactory.newInstance();
-        parser = sax.newSAXParser();
+        importer = new TodoXMLImporter(new TodoStore());
     }
 
     @Test
@@ -48,8 +35,10 @@ class TodoXMLImportTests {
                     <todos/>
                 </nought>""";
 
+        var sax = SAXParserFactory.newInstance();
+        var parser = sax.newSAXParser();
         parser.parse(new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8)),
-                handler);
+                importer);
         verify(store, never()).add(notNull());
     }
 
@@ -68,8 +57,7 @@ class TodoXMLImportTests {
                 </nought>""";
 
         var iae = assertThrows(SAXException.class,
-                () -> parser.parse(new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8)),
-                        handler));
+                () -> importer.importFrom(new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8))));
         assertTrue(iae.getMessage().contains("id attribute"));
     }
 
@@ -87,8 +75,7 @@ class TodoXMLImportTests {
                 </nought>""";
 
         var iae = assertThrows(SAXException.class,
-                () -> parser.parse(new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8)),
-                        handler));
+                () -> importer.importFrom(new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8))));
         assertTrue(iae.getMessage().contains("required setters"));
     }
 
@@ -107,8 +94,7 @@ class TodoXMLImportTests {
                 </nought>""";
         var guid = UUID.fromString("60f2abf2-f76d-49f9-a4a5-c87b13a9cbbc");
 
-        parser.parse(new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8)),
-                handler);
+        var store = importer.importFrom(new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8)));
         var todo = assertDoesNotThrow(() -> store.findById(guid));
         assertEquals("Todo 1", todo.getName());
         assertEquals("Todo text", todo.getDescription());
@@ -137,8 +123,7 @@ class TodoXMLImportTests {
         var parentGuid = UUID.fromString("80a41331-54a6-49a1-b8da-97c651a8110b");
         var childGuid = UUID.fromString("60f2abf2-f76d-49f9-a4a5-c87b13a9cbbc");
 
-        parser.parse(new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8)),
-                handler);
+        var store = importer.importFrom(new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8)));
 
         var child = assertDoesNotThrow(() -> store.findById(childGuid));
         var parent = assertDoesNotThrow(() -> store.findById(parentGuid));
@@ -168,8 +153,7 @@ class TodoXMLImportTests {
         var incompleteGuid = UUID.fromString("60f2abf2-f76d-49f9-a4a5-c87b13a9cbbc");
         var completeGuid = UUID.fromString("a36671e7-1b96-4af9-ab55-8dbae5fda273");
 
-        parser.parse(new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8)),
-                handler);
+        var store = importer.importFrom(new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8)));
         var incomplete = assertDoesNotThrow(() -> store.findById(incompleteGuid));
         var complete = assertDoesNotThrow(() -> store.findById(completeGuid));
 
@@ -196,8 +180,7 @@ class TodoXMLImportTests {
                 </nought>""";
         var guid = UUID.fromString("60f2abf2-f76d-49f9-a4a5-c87b13a9cbbc");
 
-        parser.parse(new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8)),
-                handler);
+        var store = importer.importFrom(new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8)));
         var todo = assertDoesNotThrow(() -> store.findById(guid));
         var formatter = new SimpleDateFormat("yyyy-MM-dd");
         var expDate = formatter.parse("2022-11-07");
@@ -225,8 +208,7 @@ class TodoXMLImportTests {
                 </nought>""";
         var guid = UUID.fromString("60f2abf2-f76d-49f9-a4a5-c87b13a9cbbc");
 
-        parser.parse(new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8)),
-                handler);
+        var store = importer.importFrom(new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8)));
         var todo = assertDoesNotThrow(() -> store.findById(guid));
 
         assertNull(todo.getDueDate());
@@ -251,15 +233,11 @@ class TodoXMLImportTests {
                 </nought>""";
         var guid = UUID.fromString("60f2abf2-f76d-49f9-a4a5-c87b13a9cbbc");
 
-        parser.parse(new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8)),
-                handler);
+        var store = importer.importFrom(new ByteArrayInputStream(data.getBytes(StandardCharsets.UTF_8)));
         var todo = assertDoesNotThrow(() -> store.findById(guid));
 
         assertNull(todo.getDueTime());
     }
 
-    private TodoStore store;
-    private DefaultHandler handler;
-    private SAXParser parser;
-
+    private TodoXMLImporter importer;
 }

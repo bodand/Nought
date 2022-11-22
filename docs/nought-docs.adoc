@@ -1,0 +1,229 @@
+= Nought
+Bodor András - YZBQWV
+3, {docdate}: Programozás alapjai 3 házifeladat
+:title-separator: ,
+:version-label: Verzió
+:email: bodand@kszi2.hu
+:appendix-caption: Függelék
+:example-caption: Példa
+:figure-caption: Ábra
+:listing-caption: Listázás
+:table-caption: Táblázat
+:note-caption: Megjegyzés
+:lang: hu
+:doctype: book
+:media: screen
+:chapter-signifier:
+:sectnums:
+:toc:
+:toc-title: Tartalomjegyzék
+:source-highlighter: rouge
+:mathematical-format: svg
+:stem: latexmath
+
+== Specifikáció
+
+=== Feladatleírás
+
+Nought egy teendőket tároló alkalmazás.
+A felhasználó fel tud venni teendőket, amikhez egy rövid nevet, és egy hosszabb leírást rendelhet.
+Ezeket a felhasználó kedve szerint lehetséges elkészültnek jelölni.
+Egy teendőnek emellett lehet határideje dátummal és opcionálisan időponttal.
+
+A teendők hierarchiába állíthatóak, minden elemnek tetszőleges számú aleleme lehetséges.
+Egy elem, ha vannak alelemei csak akkor állítható elkészültnek, ha minden aleleme már az, és egy elem csak akkor állítható vissza nem elkészülté, ha a szülő eleme nincs elkészülve.
+
+Minden alteendő nélkül teendőt egyszerűen lehetséges törölni a rendszerből, de lehetséges egy egész teendő hierarchia kitörlése külön menüponton keresztül, a teendővel és minden alteendőjével.
+
+Az aktuálisan felvett teendők egy fa struktúrában jelennek meg, ahol ki lehet őket választani.
+A jelenleg kiválasztott teendő adatai jelennek meg a képernyő többi részén, ahol lehet őket módosítani.
+A bevitt adatok érvényességét a rendszer ellenőrzi és az érvényteleneket visszautasítja.
+
+=== Use-casek
+
+. A felhasználó fel tud venni új teendőt a teendő-lista legfelső szintjére.
+. A felhasználó kijelölhet egy teendőt a teendő-listában.
+. A kijelölt teendőt lehetséges átnevezni, ennek a névnek nem szükséges különbözőnek lennie.
+. Ha a kijelölt teendő nevét üresre állítaná a felhasználó, akkor azt visszautasítja a program.
+. A kijelölt teendőnek a többsoros leírását lehetséges módosítani.
+. A kijelölt teendőnek lehetséges határidőt beállítani.
+. A kijelölt teendő határideje egy dátumként és egy időpontként adható meg.
+. Egy teendő határidejéhez időpont csak akkor adható, ha dátum már hozzá lett rendelve.
+. A megadott dátumot lokális dátumként értelmezi a rendszer, és ha nem értelmes dátum került megadásra, akkor visszautasítja.
+. Ha érvénytelen időpont kerül megadásra, akkor azt visszautasítja a rendszer.
+. A kijelölt teendő alá felvehető alteendő.
+. Egy teendő beállítható elkészítetté, ha már minden alteendője (ha vannak) készre lett állítva.
+. Egy teendő törölhető, ha nincsenek neki alteendői.
+. A file menüpontban lehetséges elmenteni a jelenlegi todo állapotokat.
+. A file menüpontban a felhasználó képes más todo fájlokat megnyitni.
+. A file menüpontban tudja a felhasználó bezárni az ablakot.
+. A felhasználó a todo menüpontban tud új gyökér teendőt felvenni.
+. A todo menüpont alatt lehetséges új alteendőket felvenni a jelenleg kijelölt menüpont alá.
+. A todo menüpontban lehetséges kitörölni a jelenleg kijelölt teendőt, ha nincsenek alteendői.
+. A todo menüpont alatt tudja a felhasználó kitörölni a jelenleg kijelölt teendőt, és az összes hozzá tartozó alteendőt.
+. Ha nincs egy teendő se kijelölve, akkor minden adatbeviteli mező inaktív.
+
+=== Megoldás vázlat
+
+==== Képernyő vázlat
+
+A kész grafikus felhasználói felületet a program a Java Swing grafikus rendszerén fogja megvalósítani.
+Az alábbi diagram mutatja be, hogy nagyságrendileg, hogy fog kinézni az elkészült program.
+
+[plantuml,format=svg]
+----
+@startsalt
+{#
+{* File | Todo } | *
+{
+Name | "SubSubTodo 2      "
+Description | {SI
+Complex description
+.
+.
+Multiline :)
+.
+"               "
+}
+Due | {
+    Date | "              "
+    Time | "              "
+}
+.
+[] Completed
+.
+[ Add subtodo ] | [ Remove ]
+}|{{T
++ Todo1
+++ SubTodo1
++++ SubSubTudo1
++++ <back:lightblue>SubSubTudo2</back>
+++ SubTodo2
++ Todo2
++ Todo3
++ Todo4
+++ SubTodo3
++++ SubSubTodo3
+++++ SubSubSubTodo1
++++++ SubSubSubSubTodo1
+}
+.
+.
+[ New ]
+}
+}
+@endsalt
+----
+
+==== Fájlformátum
+
+A nought file formátum egy XML fájl, amiben tárolásra kerülnek a különböző todo elemek és a hozzájuk tartozó adatok.
+A fájlhoz a következő XML Schema tartalmazza az XML formátumát.
+
+.nought.xsd
+[source,xml]
+----
+include::src/main/resources/nought.xsd[]
+----
+
+NOTE: A sémát jelző URL még nem mutat érvényes/létező adatra.
+
+A fenti XML Schema nem ellenőriz minden szemantikai szükségletet, egyedül a referenciák valós todo elemekre való referálását vizsgálja.
+Explicite kényszereket értékekre nem tartalmaz a típusokon kívül.
+
+Minden elemnek egy fájlon belül egyedi azonosítóval kell rendelkeznie, amit a program GUID-k használatával fog megvalósítani.
+
+== Felhasználói dokumentáció
+
+== Fejlesztői dokumentáció
+
+Az egyes osztályok és függvények dokumentációja JavaDoc formában elérhető, így csak az általánosabb kérdésekre tér ki ez a dokumentum.
+
+=== Osztály diagram és általános design
+
+Általánosságban a projekt három részre van bontva: `core`, `io`, és `gui`, ezek megfelelnek a Java packageknek a projekt forrásában is.
+
+A következő általános osztálydiagram mutatja be az osztályok összefüggését, a részletekre való tekintet nélkül.
+
+>OSZTÁLYOK<
+
+==== Core
+
+A `core` package feladata, hogy az egyes teendők tárolását, és különféle módon való manipulálását tegye lehetőve.
+Ez a package feltételezi, hogy a `TodoStore` objektum már létezik, és adott `Todo` objektumokat ebben az objektumban lehetséges módosítani, létrehozni és törölni.
+
+A `Todo` a fundamentális osztálya a `core` csomagnak.
+Minden egy teendőre kiterjedő információ tárolása a feladat.
+Egyértelműen beazonosítható egy megfelelő store-ban az azonosítójának köszönhetően, illetve a különböző felhasználói szempontból fontos attribútumok beállítását lehetséges rajta elvégezni.
+
+Alapvetően a `TodoStore` objektum az teendők számával kapcsolatos módosításokért felelős: teendők hozzáadása, illetve törlésével kapcsolatos függvényeket tartalmaz.
+Emellett képes keresni `Todo` objektumokat egy adott azonosítóhoz.
+Minden más művelet egy-egy teendő adataihoz tartozik, így azok beállítását nem ő végzi.
+
+image::docs/Core.png[]
+
+==== IO
+
+Az IO csomag felelős a Core csomagban található adatok kiírásáért, és beolvasásáért.
+
+A `TodoExporter` interface és az alapértelmezett megvalósítása a `TodoXMLExporter` adott `TodoStore` osztály tartalmát írják ki egy adott `Writer` streambe.
+A `TodoXMLExporter` osztály, értelem szerűen ezt XML formátumban teszi meg, a specifikációban található XML Schemának megfelelően.
+
+Ennek ellentétesen a `TodoImporter` és `TodoXMLImporter` adott `InputStream` folyamból tudják beolvasni egy `TodoStore` tartalmát.
+A `TodoXMLImporter` szintén XML formátumból, ugyanabból a sémából.
+
+>IO<
+
+==== GUI
+
+A grafikus megjelenítésért felelős csomag.
+Különféle osztályokat tartalmaz a bemenet helyességének ellenőrzésére, és adott Core csomag beli osztályok adatainak grafikus megjelenítésére.
+
+A `Nought` osztály tartalmazza a fő belépési pontot az alkalmazásba.
+
+A két fő osztály emellett a `MainFrame` és a `NewTodoDialog`.
+Ezek egy-egy legfelső szintű ablak, amivel a felhasználó interaktálhat.
+A `MainFrame` tud parancsra betölteni az IO csomag segítségével adott fájlokból és menteni adott fájlokba.
+Szintén ő jeleníti meg a jelenleg betöltött `TodoStore` tartalmát fa struktúrában, illetve a jelenleg kiválasztott `Todo` objektum adatait és azok módosítását is ő teszi lehetővé.
+Ezzel szemben a `NewTodoDialog` egy egyszerű modális ablak, ami az új teendők felvételekor kéri be azok nevét és leírását.
+
+A különbőző Verifier osztályok a felhasználó által megadott adatok helyességét ellenőrzik, hogy érvénytelen adatokat, amiket a Core csomag visszautasít ne lehessen beírni a rendszerbe.
+
+A `TodoTree`, `TodoNode` és `RootTodoNode` osztályok pedig a fa struktúra megjelenítésért felelősek: a `TodoTree` reprezentálja az egész teendő fá, míg a `TodoNode` egy adott teendőt.
+A `RootTodoNode` egy speciális elem, ami pedig a teljes gyűjtő elemet tárolja, ami magában nem teendő, csak a kirajzolt fának a gyökere.
+
+>GUI<
+
+=== Build
+
+A project a Gradle build-systemet használja, így ennek megfelelően a projektet a megfelelő Gradle parancsok segítségével lehetséges lefordítani.
+
+Magának a projektnek a fordítása triviális, a gradlew wrapper fájl tartalmaz minden megfelelő beállítást, csupán a build parancsot kell kiadni.
+
+.A projekt fordítása
+[source,shell]
+----
+$ ./gradlew build
+----
+
+.A projekt JAR fájljának elkészítése
+[source,shell]
+----
+$ ./gradlew jar
+----
+
+A Gradle Asciidoc pluginjának problémáiból adódóan azonban, a dokumentáció fordítása nem triviális; kapásból másik JDK verzió kell hozzá, mint magához a projekt fordításához.
+
+A dokumentációban való kódrészletek színezésére a Ruby http://rouge.jneen.net/[Rouge] könyvtárat használja.
+Bár a Gradle build fel van készítve ennek beszerzésére/kezelésére, csak JDK 16-nál fiatalabb JVM-eken futtatott Gradle esetén hajlandó ezt letölteni.
+Minden más esetben, pl. tisztán a dokumentáció fordítása, miután Rouge egyszer már letöltésre került, működik minden próbált JDK verzión{wj}footnote:[Amit támogat az adott Gradle verzió].
+
+A legegyszerűbb megoldás a `JAVA_HOME` beállítása egy JDK 16-nál fiatalabb JDK-re az első invokáció előtt.
+Ez platformfüggő, mindenki a saját operációs rendszerének megfelelően tegye meg ezt a lépést.
+Miután egyszer fordításra került a dokumentáció és a `.gradle` mappa tartalma nem került törlésre erre a lépésre nincs szükség.
+
+.A dokumentáció fordítása
+[source,shell]
+----
+$ ./gradlew asciidoctorPdf
+----

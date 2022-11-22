@@ -44,3 +44,5 @@ bin/
 
 ### WhiteStarUML ###
 *.~ml
+*.svg
+*.emf

@@ -9,7 +9,17 @@ import java.time.LocalTime;
 import java.util.Date;
 import java.util.UUID;
 
+/**
+ * An interface that defines the behavior of a class that can import a TodoStore
+ * from an InputStream.
+ */
 public interface TodoImporter {
+    /**
+     *
+     * @param strm
+     * @return
+     * @throws Exception
+     */
     TodoStore importFrom(InputStream strm) throws Exception;
 
     void startTodo(UUID id);

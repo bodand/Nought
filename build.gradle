@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'hu.kszi2'
-version '0.1.0-SNAPSHOT'
+version '1.0.0'
 
 repositories {
     mavenCentral()
@@ -14,14 +14,6 @@ repositories {
         gems()
     }
 }
-
-//sourceSets {
-//    main {
-//        resources {
-//            srcDirs "src/main/resources"
-//        }
-//    }
-//}
 
 dependencies {
     implementation 'org.jetbrains:annotations:23.0.0'
