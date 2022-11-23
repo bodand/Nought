@@ -39,6 +39,12 @@ pdfThemes {
     }
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'hu.kszi2.nought.gui.Nought'
+    }
+}
+
 asciidoctorj {
     modules {
         diagram.use()
