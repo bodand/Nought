@@ -12,7 +12,6 @@ import java.awt.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ColoredCellRendererTest {
-
     @BeforeEach
     void setUp() throws Exception {
         var store = new TodoStore();

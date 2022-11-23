@@ -19,7 +19,18 @@ import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The main frame of the Nought application.
+ * This is the frame which allows the editing of currently existing todos,
+ * rendering and allowing editing of the todo hierarchy.
+ */
 public class MainFrame extends JFrame {
+    /**
+     * Constructs a main frame over a given {@link TodoStore}.
+     * The contents of the store will be rendered.
+     *
+     * @param store The store containing the todos
+     */
     public MainFrame(TodoStore store) {
         this.store = store;
         try {
@@ -46,6 +57,11 @@ public class MainFrame extends JFrame {
         }
     }
 
+    /**
+     * Creates the menu bar of the frame.
+     * This contains the File and Todo menus with file saving/loading facilities
+     * and todo addition/removal features, respectively.
+     */
     private void constructMenuBar() {
         var jmb = new JMenuBar();
         var fileMenu = new JMenu("File");
@@ -108,6 +124,12 @@ public class MainFrame extends JFrame {
         setJMenuBar(jmb);
     }
 
+    /**
+     * Closes the current frame by calling dispose.
+     * If there are unsaved changes, it will open a confirmation dialog, asking
+     * whether to save them.
+     * This dialog can abort closing the window, by the user selecting cancel.
+     */
     private void closeSelf() {
         if (!saved) {
             var yes = 0;
@@ -123,64 +145,64 @@ public class MainFrame extends JFrame {
         dispose();
     }
 
+    /**
+     * Creates the todo-editor part of the frame.
+     * This contains the name and description fields, and the
+     * validity checked date/time fields, as well as the completion checkbox.
+     */
     private void constructTodoEditor() {
-        var gbc = new GridBagConstraints();
-        gbc.ipadx = 3;
-        gbc.ipady = 3;
+        var topInsets = new Insets(8, 8, 3, 8);
+        var innerInsets = new Insets(3, 8, 3, 8);
+        var bottomInsets = new Insets(3, 8, 8, 8);
+        var builder = new GridBagConstraintBuilder();
 
-        gbc.insets = new Insets(8, 8, 3, 8);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.anchor = GridBagConstraints.LINE_START;
-        gbc.weightx = 0.0;
-        add(new JLabel("Name"), gbc.clone());
-        gbc.gridx = 1;
-        gbc.anchor = GridBagConstraints.LINE_END;
-        gbc.gridwidth = 2;
-        gbc.weightx = .6;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        add(new JLabel("Name"), builder.ipad(3, 3)
+                .grid(0, 0)
+                .insets(topInsets)
+                .anchor(GridBagConstraints.LINE_START).build());
+
         name = new JTextField();
         name.getDocument().addDocumentListener(new FieldUpdateListener<>(this::getEdited, name::getText,
                 (todo, value) -> {
                     todo.setName(value);
                     reloadTreeAtSelected();
                 }));
-        add(name, gbc.clone());
+        add(name, builder.ipad(3, 3)
+                .grid(1, 0)
+                .insets(topInsets)
+                .anchor(GridBagConstraints.LINE_END)
+                .fill(GridBagConstraints.HORIZONTAL)
+                .gridwidth(2)
+                .weightx(.6)
+                .build());
 
-        gbc.insets = new Insets(3, 8, 3, 8);
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.anchor = GridBagConstraints.LINE_START;
-        gbc.weightx = 0.0;
-        gbc.gridwidth = 1;
-        add(new JLabel("Description"), gbc.clone());
-        gbc.gridx = 1;
-        gbc.anchor = GridBagConstraints.LINE_END;
-        gbc.gridwidth = 2;
-        gbc.weightx = .6;
-        gbc.weighty = 1.0;
-        gbc.fill = GridBagConstraints.BOTH;
+        add(new JLabel("Description"), builder.ipad(3, 3)
+                .grid(0, 1)
+                .insets(innerInsets)
+                .anchor(GridBagConstraints.LINE_START)
+                .build());
         description = new JTextArea();
         description.getDocument().addDocumentListener(new FieldUpdateListener<>(this::getEdited, description::getText, Todo::setDescription));
-        add(new JScrollPane(description), gbc.clone());
+        add(new JScrollPane(description), builder.ipad(3, 3)
+                .grid(1, 1)
+                .gridwidth(2)
+                .insets(innerInsets)
+                .anchor(GridBagConstraints.LINE_END)
+                .fill(GridBagConstraints.BOTH)
+                .weight(.6, 1.0)
+                .build());
 
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.gridheight = 2;
-        gbc.gridwidth = 1;
-        gbc.weightx = 0.0;
-        gbc.weighty = 0.0;
-        gbc.anchor = GridBagConstraints.FIRST_LINE_START;
-        add(new JLabel("Due"), gbc.clone());
-        gbc.gridx = 1;
-        gbc.gridheight = 1;
-        gbc.weightx = 0.0;
-        gbc.anchor = GridBagConstraints.LINE_START;
-        add(new JLabel("Date"), gbc.clone());
-        gbc.gridx = 2;
-        gbc.anchor = GridBagConstraints.LINE_END;
-        gbc.weightx = .6;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        add(new JLabel("Due"), builder.ipad(3, 3)
+                .grid(0, 2)
+                .insets(innerInsets)
+                .gridheight(2)
+                .anchor(GridBagConstraints.FIRST_LINE_START)
+                .build());
+        add(new JLabel("Date"), builder.ipad(3, 3)
+                .grid(1, 2)
+                .insets(innerInsets)
+                .anchor(GridBagConstraints.LINE_START)
+                .build());
         dueDate = new JTextField();
         dueDate.getDocument().addDocumentListener(new FieldUpdateListener<>(this::getEdited, dueDate::getText,
                 (todo, value) -> {
@@ -190,16 +212,19 @@ public class MainFrame extends JFrame {
                         /* ignore */
                     }
                 }));
-        add(dueDate, gbc.clone());
-        gbc.gridx = 1;
-        gbc.gridy = 3;
-        gbc.anchor = GridBagConstraints.LINE_START;
-        gbc.weightx = 0.0;
-        add(new JLabel("Time"), gbc.clone());
-        gbc.gridx = 2;
-        gbc.anchor = GridBagConstraints.LINE_END;
-        gbc.weightx = .6;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        add(dueDate, builder.ipad(3, 3)
+                .grid(2, 2)
+                .insets(innerInsets)
+                .fill(GridBagConstraints.HORIZONTAL)
+                .anchor(GridBagConstraints.LINE_END)
+                .weightx(.6)
+                .build());
+
+        add(new JLabel("Time"), builder.ipad(3, 3)
+                .grid(1, 3)
+                .insets(innerInsets)
+                .anchor(GridBagConstraints.LINE_START)
+                .build());
         dueTime = new JTextField();
         dueTime.getDocument().addDocumentListener(new FieldUpdateListener<>(this::getEdited, dueTime::getText,
                 (todo, value) -> {
@@ -209,7 +234,13 @@ public class MainFrame extends JFrame {
                         /* ignore */
                     }
                 }));
-        add(dueTime, gbc.clone());
+        add(dueTime, builder.ipad(3, 3)
+                .grid(2, 3)
+                .insets(innerInsets)
+                .fill(GridBagConstraints.HORIZONTAL)
+                .anchor(GridBagConstraints.LINE_END)
+                .weightx(.6)
+                .build());
 
         dueTime.setInputVerifier(new CompoundInputVerifier(
                 new TimeInputVerifier(),
@@ -220,11 +251,6 @@ public class MainFrame extends JFrame {
                 new DateTimeIntegrityVerifier(dueDate, dueTime)
         ));
 
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        gbc.weightx = 0.0;
-        gbc.anchor = GridBagConstraints.LINE_START;
-        gbc.fill = GridBagConstraints.NONE;
         completed = new JCheckBox("Completed");
         completed.addActionListener(ae -> {
             try {
@@ -234,29 +260,42 @@ public class MainFrame extends JFrame {
                     addSubtodo.setEnabled(!completed.isSelected());
                 }
             } catch (BadTodoOperation ex) {
+                var popFact = PopupFactory.getSharedInstance();
+                var pop = popFact.getPopup(this, new JTextField("Invalid"), 0, 0);
+                pop.show();
+                pop.hide();
                 /* ignore */
             }
         });
-        add(completed, gbc.clone());
+        add(completed, builder.ipad(3, 3)
+                .grid(0, 4)
+                .insets(innerInsets)
+                .anchor(GridBagConstraints.LINE_START)
+                .build());
 
-        gbc.gridx = 0;
-        gbc.gridy = 5;
-        gbc.weightx = 0.0;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(3, 8, 8, 8);
         addSubtodo = new JButton("Add subtodo");
         addSubtodo.addActionListener(ae -> newChild());
-        add(addSubtodo, gbc.clone());
-        gbc.gridx = 1;
-        gbc.gridwidth = 2;
-        gbc.weightx = 0.2;
-        gbc.anchor = GridBagConstraints.LINE_START;
-        gbc.fill = GridBagConstraints.NONE;
+        add(addSubtodo, builder.ipad(3, 3)
+                .grid(0, 5)
+                .insets(bottomInsets)
+                .anchor(GridBagConstraints.LINE_START)
+                .fill(GridBagConstraints.HORIZONTAL)
+                .build());
+
         remove = new JButton("Remove");
         remove.addActionListener(ae -> deleteSelected());
-        add(remove, gbc);
+        add(remove, builder.ipad(3, 3)
+                .grid(1, 5)
+                .insets(bottomInsets)
+                .anchor(GridBagConstraints.LINE_START)
+                .fill(GridBagConstraints.HORIZONTAL)
+                .build());
     }
 
+    /**
+     * Creates the todo explorer controls; this contains the tree and the new
+     * button.
+     */
     private void constructTodoExplorer() {
         tree = new JTree(new TodoTree(store));
         tree.setCellRenderer(new ColoredCellRenderer());
@@ -378,7 +417,6 @@ public class MainFrame extends JFrame {
     @Nullable
     private Todo getNewTodo() {
         var todoDlg = new NewTodoDialog(this, store.newBuilder());
-        todoDlg.setLocationRelativeTo(this);
         todoDlg.setVisible(true);
         return todoDlg.getBuilt();
     }

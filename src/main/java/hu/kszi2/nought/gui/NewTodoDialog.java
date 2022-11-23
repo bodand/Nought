@@ -30,61 +30,70 @@ public class NewTodoDialog extends JDialog {
 
         setSize(300, 180);
         setLayout(new GridBagLayout());
+        setLocationRelativeTo(parent);
 
+        var conb = new GridBagConstraintBuilder();
+        var topInsets = new Insets(8, 8, 3, 8);
+        var innerInsets = new Insets(3, 8, 3, 8);
+        var bottomInsets = new Insets(3, 8, 8, 8);
         // NAME //
-        add(new JLabel("Name"), new GridBagConstraints(0, 0,
-                1, 1,
-                0.0, 0.0,
-                GridBagConstraints.LINE_START,
-                GridBagConstraints.HORIZONTAL,
-                new Insets(8, 8, 3, 8), 0, 0));
+        add(new JLabel("Name"), conb.ipad(3, 3)
+                .grid(0, 0)
+                .insets(topInsets)
+                .anchor(GridBagConstraints.LINE_START)
+                .fill(GridBagConstraints.HORIZONTAL)
+                .build());
 
         var name = new JTextField();
         name.getDocument().addDocumentListener(new FieldUpdateListener<>(this::getBuilder, name::getText, TodoBuilder::setName));
-        add(name, new GridBagConstraints(1, 0,
-                2, 1,
-                1.0, 0.0,
-                GridBagConstraints.LINE_END,
-                GridBagConstraints.HORIZONTAL,
-                new Insets(8, 8, 3, 8), 0, 0));
+        add(name, conb.ipad(3, 3)
+                .grid(1, 0)
+                .gridwidth(2)
+                .insets(topInsets)
+                .weightx(1.0)
+                .anchor(GridBagConstraints.LINE_END)
+                .fill(GridBagConstraints.HORIZONTAL)
+                .build());
 
         // DESCRIPTION //
-        add(new JLabel("Description"), new GridBagConstraints(0, 1,
-                1, 1,
-                0.0, 0.0,
-                GridBagConstraints.LINE_START,
-                GridBagConstraints.HORIZONTAL,
-                new Insets(3, 8, 3, 8), 0, 0));
+        add(new JLabel("Description"), conb.ipad(3, 3)
+                .grid(0, 1)
+                .insets(innerInsets)
+                .anchor(GridBagConstraints.LINE_START)
+                .fill(GridBagConstraints.HORIZONTAL)
+                .build());
 
         var desc = new JTextArea();
         desc.getDocument().addDocumentListener(new FieldUpdateListener<>(this::getBuilder, desc::getText, TodoBuilder::setDescription));
-        add(new JScrollPane(desc), new GridBagConstraints(1, 1,
-                2, 1,
-                1.0, 1.0,
-                GridBagConstraints.LINE_END,
-                GridBagConstraints.BOTH,
-                new Insets(3, 8, 3, 8), 0, 0));
+        add(new JScrollPane(desc), conb.ipad(3, 3)
+                .grid(1, 1)
+                .gridwidth(2)
+                .weight(1.0, 1.0)
+                .insets(innerInsets)
+                .anchor(GridBagConstraints.LINE_END)
+                .fill(GridBagConstraints.BOTH)
+                .build());
 
         var ok = new JButton("OK");
         ok.addActionListener(ae -> okAction(builder));
         setOkShortcut(builder, ok);
-        add(ok, new GridBagConstraints(2, 3,
-                1, 1,
-                0, 0,
-                GridBagConstraints.LINE_END,
-                GridBagConstraints.NONE,
-                new Insets(3, 8, 8, 8), 0, 0));
+        add(ok, conb.ipad(3, 3)
+                .grid(2, 3)
+                .insets(bottomInsets)
+                .anchor(GridBagConstraints.LINE_END)
+                .fill(GridBagConstraints.NONE)
+                .build());
 
         var cancel = new JButton("Cancel");
         cancel.setBackground(new Color(176, 49, 49));
         cancel.addActionListener(ae -> cancelAction());
         setCancelShortcut(cancel);
-        add(cancel, new GridBagConstraints(2, 3,
-                1, 1,
-                0, 0,
-                GridBagConstraints.LINE_START,
-                GridBagConstraints.NONE,
-                new Insets(3, 8, 8, 8), 0, 0));
+        add(cancel, conb.ipad(3, 3)
+                .grid(2, 3)
+                .insets(bottomInsets)
+                .anchor(GridBagConstraints.LINE_START)
+                .fill(GridBagConstraints.NONE)
+                .build());
     }
 
     /**
