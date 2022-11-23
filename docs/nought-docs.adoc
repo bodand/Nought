@@ -144,8 +144,10 @@ Az egyes osztályok és függvények dokumentációja JavaDoc formában elérhet
 Általánosságban a projekt három részre van bontva: `core`, `io`, és `gui`, ezek megfelelnek a Java packageknek a projekt forrásában is.
 
 A következő általános osztálydiagram mutatja be az osztályok összefüggését, a részletekre való tekintet nélkül.
+Sok részletet elhagy inkább csak a nagyságrendi vázát adja meg a megvalósításnak, így a pontos szerkezetért az egyes csomagok saját diagramjait kell figyelembe venni.
 
->OSZTÁLYOK<
+.Osztályok áttekintő diagramja
+image::docs/NoughClasses.png[]
 
 ==== Core
 
@@ -192,7 +194,7 @@ A különbőző Verifier osztályok a felhasználó által megadott adatok helye
 A `TodoTree`, `TodoNode` és `RootTodoNode` osztályok pedig a fa struktúra megjelenítésért felelősek: a `TodoTree` reprezentálja az egész teendő fá, míg a `TodoNode` egy adott teendőt.
 A `RootTodoNode` egy speciális elem, ami pedig a teljes gyűjtő elemet tárolja, ami magában nem teendő, csak a kirajzolt fának a gyökere.
 
->GUI<
+image::docs/GUI.png[]
 
 === Build
 

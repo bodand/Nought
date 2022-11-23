@@ -63,6 +63,7 @@ public class TodoNode extends DefaultMutableTreeNode {
      * @return Whether the todo stored is completed
      */
     public boolean completedTodo() {
+        assert todo != null;
         return todo.isCompleted();
     }
 

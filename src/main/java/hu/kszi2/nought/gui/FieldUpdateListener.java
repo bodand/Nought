@@ -34,16 +34,16 @@ class FieldUpdateListener<T> implements DocumentListener {
     /**
      * Takes the three callback parameters and stores them in the class.
      *
-     * @param todoSource The source supplier
-     * @param inputLens  The input supplier
-     * @param todoLens   The consumer
+     * @param source The source supplier
+     * @param input  The input supplier
+     * @param consumer   The consumer
      */
-    public FieldUpdateListener(Supplier<T> todoSource,
-                               Supplier<String> inputLens,
-                               BiConsumer<T, String> todoLens) {
-        this.todoSource = todoSource;
-        this.inputLens = inputLens;
-        this.todoLens = todoLens;
+    public FieldUpdateListener(Supplier<T> source,
+                               Supplier<String> input,
+                               BiConsumer<T, String> consumer) {
+        this.source = source;
+        this.input = input;
+        this.consumer = consumer;
     }
 
     @Override
@@ -67,13 +67,13 @@ class FieldUpdateListener<T> implements DocumentListener {
      * it calls the consumer with the outputs of the two input callbacks.
      */
     private void updateField() {
-        var todo = todoSource.get();
+        var todo = source.get();
         if (todo != null) {
-            todoLens.accept(todo, inputLens.get());
+            consumer.accept(todo, input.get());
         }
     }
 
-    private final Supplier<T> todoSource;
-    private final Supplier<String> inputLens;
-    private final BiConsumer<T, String> todoLens;
+    private final Supplier<T> source;
+    private final Supplier<String> input;
+    private final BiConsumer<T, String> consumer;
 }

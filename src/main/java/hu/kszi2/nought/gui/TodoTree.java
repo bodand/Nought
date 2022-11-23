@@ -70,7 +70,8 @@ public class TodoTree extends DefaultTreeModel {
      * @param linkToParent Whether to link the todo objects together as well
      */
     public void addTodoAsChildToNode(@NotNull TodoNode node,
-                                     Todo todo, boolean linkToParent) {
+                                     Todo todo,
+                                     boolean linkToParent) {
         var todoNode = new TodoNode(todo);
         node.add(todoNode, linkToParent);
         var it = todo.getChildren().stream()
@@ -81,5 +82,5 @@ public class TodoTree extends DefaultTreeModel {
         }
     }
 
-    private final transient TodoStore store;
+    private final TodoStore store;
 }

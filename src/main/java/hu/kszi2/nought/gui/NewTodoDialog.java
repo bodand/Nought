@@ -75,8 +75,8 @@ public class NewTodoDialog extends JDialog {
                 .build());
 
         var ok = new JButton("OK");
-        ok.addActionListener(ae -> okAction(builder));
-        setOkShortcut(builder, ok);
+        ok.addActionListener(ae -> okAction());
+        setOkShortcut(ok);
         add(ok, conb.ipad(3, 3)
                 .grid(2, 3)
                 .insets(bottomInsets)
@@ -125,18 +125,16 @@ public class NewTodoDialog extends JDialog {
      * Adds a shortcut on the Ctrl+Enter keys to OK the dialog window, and
      * create the new todo object.
      *
-     * @param builder The todo builder object
-     * @param ok      The button to handle the creation event
+     * @param ok The button to handle the creation event
      */
-
-    private void setOkShortcut(TodoBuilder builder, @NotNull JButton ok) {
+    private void setOkShortcut(@NotNull JButton ok) {
         ok.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
                 .put(KeyStroke.getKeyStroke("control ENTER"),
                         "shortcutOk");
         ok.getActionMap().put("shortcutOk", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                okAction(builder);
+                okAction();
             }
         });
     }
@@ -144,10 +142,8 @@ public class NewTodoDialog extends JDialog {
     /**
      * The action that happens whenever the "OK" button was pressed.
      * The creation of the new todo object.
-     *
-     * @param builder The builder object
      */
-    private void okAction(@NotNull TodoBuilder builder) {
+    private void okAction() {
         try {
             built = builder.build();
             dispose();

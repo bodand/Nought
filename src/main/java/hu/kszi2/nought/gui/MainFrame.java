@@ -260,10 +260,6 @@ public class MainFrame extends JFrame {
                     addSubtodo.setEnabled(!completed.isSelected());
                 }
             } catch (BadTodoOperation ex) {
-                var popFact = PopupFactory.getSharedInstance();
-                var pop = popFact.getPopup(this, new JTextField("Invalid"), 0, 0);
-                pop.show();
-                pop.hide();
                 /* ignore */
             }
         });
@@ -297,6 +293,8 @@ public class MainFrame extends JFrame {
      * button.
      */
     private void constructTodoExplorer() {
+        var builder = new GridBagConstraintBuilder();
+
         tree = new JTree(new TodoTree(store));
         tree.setCellRenderer(new ColoredCellRenderer());
         tree.getModel().addTreeModelListener(new TreeModificationListener(e -> setSaved(false)));
@@ -310,23 +308,30 @@ public class MainFrame extends JFrame {
             var node = (TodoNode) path.getLastPathComponent();
             changeEdited(node.getTodo());
         });
-        add(new JScrollPane(tree),
-                new GridBagConstraints(3, 0, 1, 5, 0.4, 1.0,
-                        GridBagConstraints.CENTER,
-                        GridBagConstraints.BOTH,
-                        new Insets(8, 0, 3, 8),
-                        0, 0));
+        add(new JScrollPane(tree), builder.ipad(3, 3)
+                .grid(3, 0)
+                .gridheight(5)
+                .weight(.4, 1.)
+                .anchor(GridBagConstraints.CENTER)
+                .fill(GridBagConstraints.BOTH)
+                .insets(8, 0, 3, 8)
+                .build());
 
         JButton addNew = new JButton("New");
         addNew.addActionListener(ae -> newRoot());
-        add(addNew,
-                new GridBagConstraints(3, 5, 1, 1, 0.0, 0.0,
-                        GridBagConstraints.LINE_START,
-                        GridBagConstraints.NONE,
-                        new Insets(3, 0, 8, 8),
-                        0, 0));
+        add(addNew, builder.ipad(3, 3)
+                .grid(3, 5)
+                .insets(3, 0, 8, 8)
+                .anchor(GridBagConstraints.LINE_START)
+                .fill(GridBagConstraints.NONE)
+                .build());
     }
 
+    /**
+     * Shows a file selection dialog to the user, and if they do not cancel it,
+     * it imports the todo list from the file into a new store and sets that
+     * as our new list of todos to work with.
+     */
     private void loadNewStore() {
         try {
             var dlg = new FileDialog(this, "Nought - Load", FileDialog.LOAD);
@@ -351,6 +356,10 @@ public class MainFrame extends JFrame {
         }
     }
 
+    /**
+     * Saves to the currently opened file.
+     * If there is no file open, it behaves as if saveStoreAs was called.
+     */
     private void saveStore() {
         if (currentFile == null) {
             saveStoreAs();
@@ -360,6 +369,12 @@ public class MainFrame extends JFrame {
         saveStoreTo(store, currentFile);
     }
 
+    /**
+     * Shows a file selection dialog to the user and if they do not cancel it,
+     * we save our current list of todos to this file.
+     * This file becomes the currently opened file, and any further saves which
+     * do not specify a file will be saved to this file.
+     */
     private void saveStoreAs() {
         var dlg = new FileDialog(this, "Nought - Save as...", FileDialog.SAVE);
         var file = showFileDialog(dlg);
@@ -369,6 +384,16 @@ public class MainFrame extends JFrame {
         saveStoreTo(store, currentFile);
     }
 
+    /**
+     * Implementation of saving a store to a file.
+     * Creates the store's default exporter class and exports it into the
+     * file given as a parameter.
+     * If any failures occur, an error message is shown to the user and the
+     * save is aborted.
+     *
+     * @param store The store to save
+     * @param file  The file to save to
+     */
     private void saveStoreTo(TodoStore store, File file) {
         try {
             var exporter = store.newExporter();
@@ -383,6 +408,16 @@ public class MainFrame extends JFrame {
         }
     }
 
+    /**
+     * Sets common settings on a file dialog window and presents it to the user.
+     * If the user cancels the selection the function returns {@code null},
+     * otherwise it returns the full file-path to the selected file.
+     * Also filters for files ending in {@code .not}, however, this does not
+     * seem to work on Windows.
+     *
+     * @param dlg The file dialog to show
+     * @return The selected file
+     */
     private @Nullable File showFileDialog(@NotNull FileDialog dlg) {
         dlg.setFilenameFilter((dir, filename) -> filename.endsWith(".not"));
         dlg.setVisible(true);
@@ -395,15 +430,24 @@ public class MainFrame extends JFrame {
         return new File(filepath);
     }
 
+    /**
+     * Adds a new root to the current todo tree and store.
+     * The subtree is refreshed as to immediately allow the user to see the changes.
+     */
     private void newRoot() {
         var built = getNewTodo();
         if (built == null) return;
 
         var treeModel = (TodoTree) tree.getModel();
         treeModel.addRootTodo(built);
-        treeModel.reload();
+        treeModel.reload(((TodoNode) treeModel.getRoot()));
     }
 
+    /**
+     * Adds a new node to the current todo tree and store, as a child node to
+     * whichever node is currently selected for editing.
+     * The subtree is refreshed as to immediately allow the user to see the changes.
+     */
     private void newChild() {
         var built = getNewTodo();
         if (built == null) return;
@@ -411,9 +455,17 @@ public class MainFrame extends JFrame {
         var treeModel = (TodoTree) tree.getModel();
         var node = ((TodoNode) tree.getLastSelectedPathComponent());
         treeModel.addTodoAsChildToNode(node, built, true);
-        treeModel.reload();
+        treeModel.reload(node);
     }
 
+    /**
+     * Shows a dialog to the user asking them for a new todo's name and description.
+     * If the user fills out this information, a new {@link Todo} object is built,
+     * and is returned.
+     * If the user cancels the dialog, {@code null} is returned.
+     *
+     * @return The created todo, or {@code null}
+     */
     @Nullable
     private Todo getNewTodo() {
         var todoDlg = new NewTodoDialog(this, store.newBuilder());
@@ -421,6 +473,12 @@ public class MainFrame extends JFrame {
         return todoDlg.getBuilt();
     }
 
+    /**
+     * Remove the currently selected todo node from the tree, and the associated
+     * todo object from the store.
+     * If an error occurs, such as trying to create orphan todos, an error
+     * message is shown to the user and no action is taken.
+     */
     private void deleteSelected() {
         try {
             if (edited != null) {
@@ -440,6 +498,12 @@ public class MainFrame extends JFrame {
         }
     }
 
+    /**
+     * Asks if the user really wants to delete the subtree, and then if they
+     * are really sure about this, the selected todo and all its children are
+     * removed from the tree and the store.
+     * This is a really destructive operation, handle with care.
+     */
     private void deleteSelectedTree() {
         if (edited != null) {
             var yes = 0;
@@ -459,16 +523,34 @@ public class MainFrame extends JFrame {
         }
     }
 
+    /**
+     * Basically a setter for the currently open file.
+     * Updates all file related redundant information: the file variable
+     * and the title.
+     *
+     * @param file The new file to use
+     */
     private void changeCurrentFile(@NotNull File file) {
         changeEdited(null);
-        var titleBuilder = new StringBuilder();
-        if (!saved) titleBuilder.append("*");
-        titleBuilder.append("Nought - ");
-        titleBuilder.append(file.getName());
-        setTitle(titleBuilder.toString());
+        setTitle("Nought - " + file.getName());
         currentFile = file;
     }
 
+    /**
+     * Setter for the edited todo.
+     * <p>
+     * If the edited todo is unset, disables all relevant todo editing
+     * functionality, such as the text fields setting different properties.
+     * </p>
+     * <p>
+     * If the edited todo is a valid todo, the values of the text fields are
+     * updated to reflect this change and enables editing features.
+     * Based on the family situation of the todo, the completion checkbox is
+     * also enabled.
+     * </p>
+     *
+     * @param todo The todo to set as the currently edited todo
+     */
     private void changeEdited(Todo todo) {
         edited = todo;
         if (edited == null) {
@@ -526,16 +608,35 @@ public class MainFrame extends JFrame {
         deleteTreeMenu.setEnabled(true);
     }
 
-    public Todo getEdited() {
+    /**
+     * Returns the currently edited todo object.
+     * Used as a lambda object.
+     *
+     * @return The edited todo
+     */
+    private Todo getEdited() {
         return edited;
     }
 
-    public void reloadTreeAtSelected() {
+    /**
+     * Instructs the jtree to reload itself at the currently selected node.
+     * If there is nothing selected, the function is nop.
+     */
+    private void reloadTreeAtSelected() {
         if (edited != null) {
             ((DefaultTreeModel) tree.getModel()).reload(((TreeNode) tree.getLastSelectedPathComponent()));
         }
     }
 
+    /**
+     * Sets the saved status of the currently open todo store.
+     * If the saved status is set to true and the title starts with an asterisk,
+     * it is removed;
+     * otherwise if the new saved status is false and the title does not already
+     * have a leading asterisk, it is added.
+     *
+     * @param saved The new save status of the todo store
+     */
     private void setSaved(boolean saved) {
         if (!saved) {
             if (!getTitle().startsWith("*")) {

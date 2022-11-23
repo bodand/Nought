@@ -99,6 +99,8 @@ public class TodoStore implements Serializable {
 
     /**
      * Removes a todo and all its children specified by the branch's root todo's id.
+     * This is a really destructive operation without any verification,
+     * handle with extreme care.
      *
      * @param id The id to search for and delete
      * @throws NoSuchElementException The store does not contain an element with the given id
