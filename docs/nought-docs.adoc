@@ -20,6 +20,8 @@ Bodor András - YZBQWV
 :source-highlighter: rouge
 :mathematical-format: svg
 :stem: latexmath
+:experimental:
+:icons: font
 
 == Specifikáció
 
@@ -134,6 +136,191 @@ Explicite kényszereket értékekre nem tartalmaz a típusokon kívül.
 Minden elemnek egy fájlon belül egyedi azonosítóval kell rendelkeznie, amit a program GUID-k használatával fog megvalósítani.
 
 == Felhasználói dokumentáció
+
+A Nought program teendők tárolására szolgál.
+Ennek lehetőségeit fogja a következőkben leírni ez a kézikönyv.
+
+=== Indítás
+
+Program indításakor a következő képernyő fog fogadni bennünket.
+
+.Kezdő képernyő
+image::docs/start.png[]
+
+Ez az ablak a Nought program elsődleges munkafelülete.
+Itt lehetséges a különbőző teendőkkel kapcsolatos adminisztratív feladatokat ellátni.
+
+Innen két módon lehetséges továbblépni: ha már létezik egy fájlunk, ami a teendőket tárolja akkor a <<open_store>>-ban leírtak szerint lehetséges ezeket megnyitni.
+
+Amennyiben még nem rendelkezünk teendő állománnyal, vagy újat szeretnénk létrehozni, akkor a következő, <<new_store>>, bekezdésben tárgyaltak szerint kezdhetjük el a munkánkat.
+
+[#new_store]
+=== Új teendő-lista kezdése
+
+Amennyiben új teendőket szeretnénk felvenni, akkor Nought megnyitás után rögtön készen is áll, hogy kezdjünk.
+
+Alaphelyzetben, csak egyetlen gomb aktív a képernyőn, ez a btn:[New] gomb az ablak jobb alsó részén.
+
+.Az új gomb
+image::docs/new-btn.png[]
+
+Ennek megnyomásával lehetséges olyan új teendőket felvenni, amelyek nem egy másik teendő részét képezik.
+Az így felvett teendők tehát legfelső szinten fognak szerepelni a teendők listájában.
+
+[#new_root]
+=== Legfelső szintű új teendő felvétele
+
+A btn:[New] gomb egy új ablakot fog megjeleníteni a képernyőn, az eddig látott Nought ablak fölött.
+Ez az ablak fogja az új teendő alapvető adatait felvenni.
+
+A btn:[New] gomb mellett, a leírt funkcionalitás elérhető a menu:Todo[New] menüpontból, illetve a kbd:[Ctrl+Shift+N] billentyűkombinációval is.
+
+.Új teendő felvevő ablak
+image::docs/new-todo.png[]
+
+Amennyiben kitöltöttük a látható két mezőt--a teendő nevét, és a hozzá tartozó leírás mezőt--akkor az btn:[OK] gomb megnyomásával tudjuk létrehozni az új teendőnket.
+Ezen beállítások módosíthatóak később, nem probléma, ha mondjuk véletlenül elgépelnénk valamit, vagy ha utólag még hozzá szeretnénk valamit írni a leíráshoz.
+Ha szeretnénk az egér használatát mellőzni, a kbd:[Ctrl+Enter] billentyűkombinációval az btn:[OK] gomb funkcióját kiválthatjuk.
+
+Ha a folyamat közben meggondolnánk magunkat az új teendő felvételével kapcsolatban, akkor a piros btn:[Cancel] vagy az kbd:[Esc] billentyű lenyomásával bezárhatjuk az ablakot, a teendő létrehozása nélkül.
+
+A sikeres teendő felvétel után megjelenik a jobb oldalt található teendő listában.
+Ezt jelöli a következő ábra sárgával.
+
+image::docs/todo-added.png[]
+
+[#new_sub]
+=== Új alteendő hozzáadása
+
+Amennyiben rendelkezünk már egy teendővel, akkor tudunk hozzá tartozó alárendelt teendőket felvenni.
+Ehhez ki kell választani a teendő listából azt a teendőt, ami alá alteendőket szeretnénk felvenni.
+
+Kiválasztott teendő esetén a btn:[Add subtodo] gomb aktiválódik.
+A btn:[Add subtodo] gomb használata mellett a funkcionalitás elérhető a menu:Todo[New subtodo] menüpontból, és a kbd:[Ctrl+N] billentyűkkel is elérhető.
+Ezek opciók is csak akkor elérhetőek, amikor az btn:[Add subtodo] gomb.
+
+[NOTE]
+====
+Lehetséges, hogy a btn:[Add subtodo] gomb nem aktív, pedig ki van jelölve egy teendő.
+Ennek fő oka, hogy a teendő elkészültre van állítva.
+Ilyenkor már nem lehetséges új alteendőket hozzáadni, hiszen minden alteendőnek kész kell lennie, hogy egy teendőt elkészültnek jelölhessünk.
+Hogy felvehessünk újabb teendőt a teendőhöz tartozó btn:[Completed] jelölő négyzetet kell kipipálni.
+Pontos leírás a teendők készre állításáról megtalálható a <<set_complete>> szakaszban.
+====
+
+Ennek megnyomásakor a <<new_root>> szakaszban leírtakkal megegyezű ablak fog megjelenni.
+Ennek az ablaknak a használatával az elkészült teendő azonban a kijelölt teendő alatt fog megjelenni a listában.
+
+image::docs/sub-added.png[]
+
+Látható, hogy egy teendő, amint rendelkezik alteendőkkel, megváltoztatja az ikonját egy mappára, amelyet be is lehetséges csukni, ha éppen nem érdekel bennünket egy adott teendőnek az összes alteendője.
+
+[#remove_leaf]
+=== Egy teendő törlése
+
+NOTE: Ebben a szakaszban leírtak csak azon teendőkre érvényes, amelyeknek nincs alteendőjük.
+A többi teendő törléséhez az <<remove_tree>> szakaszban leírtak érvényesek.
+
+Ha ki szeretnénk törölni egy teendőt, akkor ki kell jelölni.
+Ilyenkor aktívvá válik a btn:[Remove] gomb a főképernyőn.
+Emellett a funkció elérhető a menu:Todo[Delete] menüpontból és a kbd:[Ctrl+D] gyors-gombbal.
+
+image::docs/remove-btn.png[]
+
+A gomb megnyomásával a teendő törlődik.
+
+[#remove_tree]
+=== Egy teendő és összes alteendőjének törlése
+
+CAUTION: Ez a művelet potenciálisan nagyon sok adatot képes törölni.
+Nought meg is kérdezi, hogy biztos végre szeretnénk-e hajtani, de ettől függetlenül még sok kárt képes okozni.
+
+Amennyiben egy teendőt azonnal az összes alteendőjével szeretnénk törölni, ki kell választani a legfelső olyan teendőt, amelyiket szeretnénk törölni, és kiválasztani.
+
+A művelet nagyon destruktív jellege miatt nem szerepel hozzá tartozó gomb a főképernyőn, egyedül a menu:Todo[Delete with subtodos] menüpontból vagy a kbd:[Ctrl+Shift+D] gombbal lehetséges elérni.
+
+Amennyiben a válaszott módon elértük a funkciót, akkor Nought a következő ablakot fogja megjeleníteni, hogy biztosak vagyunk-e, minden alteendő törlésében.
+Ezen az ablakon a btn:[Yes] gombbal a törlés végbe megy, míg a btn:[No] gombbal vissza lehet lépni, megőrizve adatainkat.
+
+image::docs/rm-tree-q.png[]
+
+[#set_complete]
+=== Egy teendő elkészültre állítása
+
+Egy teendő elkészültségét a btn:[Completed] jelölődoboz jelzi.
+Amennyiben be van pipálva, akkor a teendő elkészültnek van jelölve.
+
+A jelölő doboz akkor aktív, ha módosítani lehet az adott teendő elkészültség állapotát.
+Ez általában igaz, csak kettő esetben van olyan, hogy nem lehetséges a módosítás.
+
+Első eset, amikor egy teendőnek vannak alteendői, és azok között van olyan, amelyik nincs elkészülve.
+Ilyenkor a jelölőgomb nincs bepipálva és inaktív.
+
+Második eset pedig, egy alteendő, amelyiknek a tartalmazó teendője már el van készülve.
+Ilyenkor a jelölődoboz be van jelölve és inaktív.
+
+Mind két esetben a megfelelő kényszer feloldásával lehetséges újra módosítani a jelölést.
+
+.Az alteendő még nincs elkészülve, így inaktív a jelölődoboz
+image::docs/childe-not-done.png[]
+
+.A tartalmazó teendő már elkészült, így inaktív a jelölődoboz
+image::docs/parent-done.png[]
+
+[#set_due]
+=== Határidő beállítása egy teendőn
+
+Határidőt két fokozatban lehetséges beállítani egy teendőhöz.
+Elsőként egy dátum rendelhető hozzá, és ha ezen belül is pontosítani szeretnénk, akkor egy időpont is megadható.
+
+Ezen két szövegdoboz tartalma ellenőrizve van, hogy érvényes dátumot és időt tartalmaznak.
+A dátumot év, hónap, nap formában kell megadni, kötőjelekkel elválasztva, és az év mind a négy számjegyét kiírni, például 2022-11-23 jelöli 2022. november 23.-át.
+Különben a program nem engedi, hogy kilépjünk a szövegdobozból.
+
+Időpont megadásakor óra perc a minimum megadandó adat, két-két számjeggyel mind kettőt.
+Ha szükséges, másodperc is megadható.
+Minden mezőt kettősponttal kell elválasztani egymástól, például 12:03 az írásmódja a dél múlt 3 perccel időpontnak.
+
+IMPORTANT: Időpont csak akkor adható hozzá a teendőhöz, ha már dátum meg van adva.
+Különben minden bemenetet érvénytelennek tekint az ellenőrző.
+
+.Érvénytelen dátum megadási kísérlet
+image::docs/inv-date.png[]
+
+[#save]
+=== Teendők mentése
+
+Az elkészített teendőinket kétféle módon lehetséges elmenteni.
+Egyik az egyszerű mentés.
+Ilyenkor az aktív fájlba történik a mentés.
+Aktív fájl akkor állítódik be, amikor fájlt nyitunk meg, vagy egy a <<save_as>> szakaszban leírtak szerint, másik fájlba mentjük a jelenlegi állapotokat.
+
+Hogy rendelkezünk-e aktív fájllal azt egyszerűen lehetséges megállapítani a program címéből: ha csak a Nought felirat szerepel benne, akkor nem rendelkezünk nyitott fájllal, míg ha ott látunk egy fájlnevet, akkor az a fájl a jelenlegi aktív fájlunk.
+
+.Nem aktív és aktív fájllal rendelkező ablakcímek
+image::docs/no-file-file.png[]
+
+Ha nem rendelkezünk aktív fájllal, akkor a mentés művelet azonos a mentés másként művelettel, amelyet a <<save_as>> szekció ír le.
+
+A mentés kezdeményezését vagy a menu:File[Save] menüponttal, vagy a kbd:[Ctrl+S] billentyűkkel tudjuk elérni.
+
+[#save_as]
+=== Teendők mentése másik fájlba
+
+Ha nem az aktív fájlba szeretnénk menteni módosításainkat, akkor a mentés másként funkció használatos.
+Ez kiírja a jelenlegi állapotát a teendőknek a kiválasztott fájlba, és beállítja ezt a fájlt aktív fájlnak.
+Emiatt ezután a sima mentés lehetőség is ebbe a fájlba fog dolgozni.
+
+A műveletet a menu:File[Save as] menüponttal, vagy a kbd:[Ctrl+Shift+S] billentyűkombinációkkal tudjuk elérni.
+
+[#open_store]
+=== Meglévő teendők megnyitása
+
+Ha szeretnénk egy már meglévő teendő állományt betölteni olvasásra vagy módosításra, akkor a menu:File[Load] menüpontból tudjuk ezt indítványozni.
+Ugyan ez elérhető még a kbd:[Ctrl+L] gyors-gombbal is.
+
+Ilyenkor a kiválasztott fájl betöltésre kerül, és minden az előzőekben leírt funkció elérhető lesz.
+Ha a fájl nem megfelelő formátumú, akkor egy hibaüzenet formájában informál Nought, és nem tölti be a fájlt.
 
 == Fejlesztői dokumentáció
 

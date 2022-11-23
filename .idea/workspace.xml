@@ -4,16 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32b39ae0-63dd-43ac-acbf-d7427c70cf49" name="Changes" comment="GridBagConstraintBuilder">
+    <list default="true" id="32b39ae0-63dd-43ac-acbf-d7427c70cf49" name="Changes" comment="dev docs done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Nought.uml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Nought.uml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/nought-docs.adoc" beforeDir="false" afterPath="$PROJECT_DIR$/docs/nought-docs.adoc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoStore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/core/TodoStore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/FieldUpdateListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/FieldUpdateListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/MainFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/NewTodoDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/NewTodoDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TodoNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TodoNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TodoTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hu/kszi2/nought/gui/TodoTree.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -301,7 +295,7 @@
       <workItem from="1668978889167" duration="6068000" />
       <workItem from="1669023448403" duration="15319000" />
       <workItem from="1669129493322" duration="27214000" />
-      <workItem from="1669202236197" duration="16584000" />
+      <workItem from="1669202236197" duration="23146000" />
     </task>
     <task id="LOCAL-00001" summary="core package and start io">
       <created>1668811541155</created>
@@ -422,7 +416,21 @@
       <option name="project" value="LOCAL" />
       <updated>1669213285827</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="docs done">
+      <created>1669224932851</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1669224932851</updated>
+    </task>
+    <task id="LOCAL-00019" summary="dev docs done">
+      <created>1669225066182</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1669225066182</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -459,7 +467,9 @@
     <MESSAGE value="io docs" />
     <MESSAGE value="some gui docs and gui tests" />
     <MESSAGE value="GridBagConstraintBuilder" />
-    <option name="LAST_COMMIT_MESSAGE" value="GridBagConstraintBuilder" />
+    <MESSAGE value="docs done" />
+    <MESSAGE value="dev docs done" />
+    <option name="LAST_COMMIT_MESSAGE" value="dev docs done" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

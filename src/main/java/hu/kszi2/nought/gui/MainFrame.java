@@ -101,8 +101,8 @@ public class MainFrame extends JFrame {
         newRoot.addActionListener(ae -> newRoot());
         newRoot.setAccelerator(KeyStroke.getKeyStroke("control shift N"));
         todoMenu.add(newRoot);
-        // Todo > New dependent
-        newTodoMenu = new JMenuItem("New dependent", KeyEvent.VK_D);
+        // Todo > New subtodo
+        newTodoMenu = new JMenuItem("New subtodo", KeyEvent.VK_D);
         newTodoMenu.addActionListener(ae -> newChild());
         newTodoMenu.setAccelerator(KeyStroke.getKeyStroke("control N"));
         todoMenu.add(newTodoMenu);
