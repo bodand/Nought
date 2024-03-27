@@ -1,0 +1,13 @@
+= Nought
+
+Nought is a cross-platform, Java Swing based, desktop todo-list application, with a hierarchical todo-tree.
+The todo list is saved in an open XML format, to allow editing, querying, or even modifying with automated tools, even on the command line.
+
+== Homework disclaimer
+
+This was my homework for the class _The basics of programming 3_ at the Budapesti University of Technology.
+
+== License 
+
+The project is licensed under the BSD 3-Clause license (SPDX: BSD-3-Clause).
+For more information see `LICENSE.adoc`.
