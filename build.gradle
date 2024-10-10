@@ -1,8 +1,8 @@
 plugins {
     id 'java'
-    id 'org.asciidoctor.jvm.convert' version '3.3.2'
-    id 'org.asciidoctor.jvm.gems' version '3.3.2'
-    id 'org.asciidoctor.jvm.pdf' version '3.3.2'
+    id 'org.asciidoctor.jvm.convert' version '4.0.3'
+    id 'org.asciidoctor.jvm.gems' version '4.0.3'
+    id 'org.asciidoctor.jvm.pdf' version '4.0.3'
 }
 
 group 'hu.kszi2'
@@ -52,21 +52,14 @@ asciidoctorj {
     }
 }
 
-asciidoctorPdf {
+tasks.asciidoctorPdf {
     dependsOn asciidoctorGemsPrepare
-
-    // JDK 16+ workaround, doesn't work
-    // Need to install things w/ JDK < 16, then change back to JDK16+
-    inProcess = JAVA_EXEC
-    forkOptions {
-        jvmArgs("--add-opens", "java.base/sun.nio.ch=ALL-UNNAMED", "--add-opens", "java.base/java.io=ALL-UNNAMED")
-    }
 
     asciidoctorj {
         requires 'rouge'
     }
 
-    fontsDir = file('docs/fonts')
+    fontsDirs += file('docs/fonts')
     theme 'plex.yml'
     sourceDir file('docs')
     outputDir file('build/docs')
